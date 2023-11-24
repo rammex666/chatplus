@@ -1,0 +1,4 @@
+name: chatplus
+version: '${project.version}'
+main: org.rammex.chatplus.Chatplus
+api-version: '1.16'
