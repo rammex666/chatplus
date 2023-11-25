@@ -3,10 +3,28 @@
 # {world} will be replaced by the world where the player is located
 # {message} will be replaced by the message of the player
 
+# You can use Placeholder API too
+
 chatformat:
   format: "{player} >> {message}"
+
+#Send a message when a player join the server
+join:
+  enable: true
+  message: "&aWelcome {player} on {......}"
+
 
 banned-words:
   - "stfu"
   - "ez"
   - "skillissue"
+
+scoreboard:
+  enable: true
+  title: "&n&lTitleOfTheScoreBoard"
+  content:
+    - "&1line1"
+    - "&2line2"
+    - "&3line3"
+    - "&4line4"
+#when you modify the scoreboard you should disconnect and reconnect to your server or wait a little bit

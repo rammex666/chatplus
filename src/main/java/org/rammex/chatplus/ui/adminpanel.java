@@ -14,11 +14,9 @@ public class adminpanel {
     public static void getadminpanel(Player player){
         Inventory inv = Bukkit.createInventory(null, 27, "Admin Panel");
 
-        inv.setItem(11, getItem(Material.BEDROCK, ChatColor.RED+"SOON"));
+        inv.setItem(11, getItem(Material.PAPER, ChatColor.RED+"Chat Format"));
         inv.setItem(13, getItem(Material.BEDROCK, ChatColor.RED+"SOON"));
         inv.setItem(15, getItem(Material.BEDROCK, ChatColor.RED+"SOON"));
-
-
 
         player.openInventory(inv);
     }

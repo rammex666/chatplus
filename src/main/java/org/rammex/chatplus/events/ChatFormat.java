@@ -28,9 +28,8 @@ public class ChatFormat implements Listener {
         String message = event.getMessage();
         for (String bannedWord : bannedWords) {
             if (message.toLowerCase().contains(bannedWord.toLowerCase())) {
-                // Le message contient un mot banni, annulez l'événement et informez le joueur
                 event.setCancelled(true);
-                event.getPlayer().sendMessage(ChatColor.RED + "Votre message contient un mot banni.");
+                event.getPlayer().sendMessage(ChatColor.RED + "Your Message Contains A Ban Word");
                 return;
             }
         }
