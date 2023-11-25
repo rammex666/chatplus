@@ -19,7 +19,7 @@ public class UiClick implements Listener {
         final Inventory inventory = e.getInventory();
         final Player whoClicked = (Player) e.getWhoClicked();
         final String title = e.getView().getTitle();
-        if (!(title.equalsIgnoreCase("Admin Panel"))){
+        if (title.equalsIgnoreCase("Admin Panel")){
             e.setCancelled(true);
             e.setResult(Event.Result.DENY);
         };

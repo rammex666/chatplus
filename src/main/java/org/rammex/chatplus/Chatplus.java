@@ -4,6 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.rammex.chatplus.commands.ctpadmin;
 import org.rammex.chatplus.commands.ctphelp;
+import org.rammex.chatplus.commands.ctpreload;
+import org.rammex.chatplus.events.ChatFormat;
 import org.rammex.chatplus.events.UiClick;
 
 public final class Chatplus extends JavaPlugin {
@@ -13,7 +15,12 @@ public final class Chatplus extends JavaPlugin {
         logmessage();
         this.getCommand("ctphelp").setExecutor(new ctphelp());
         this.getCommand("ctpadmin").setExecutor(new ctpadmin(this));
+        this.getCommand("ctpreload").setExecutor(new ctpreload(this));
         Bukkit.getPluginManager().registerEvents(new UiClick(this), this);
+        Bukkit.getPluginManager().registerEvents(new ChatFormat(this), this);
+        saveDefaultConfig();
+        reloadConfig();
+        getConfig();
     }
 
     @Override

@@ -1,0 +1,12 @@
+# Some placeholder :
+# {player} will be replaced by the name of the player
+# {world} will be replaced by the world where the player is located
+# {message} will be replaced by the message of the player
+
+chatformat:
+  format: "{player} >> {message}"
+
+banned-words:
+  - "stfu"
+  - "ez"
+  - "skillissue"

@@ -2,6 +2,7 @@ name: chatplus
 version: '${project.version}'
 main: org.rammex.chatplus.Chatplus
 api-version: '1.16'
+softdepend: [PlaceholderAPI]
 
 commands:
   ctphelp:
@@ -10,3 +11,6 @@ commands:
   ctpadmin:
     description: "Config ingame of the plugin"
     permission: ctp.admin
+  ctpreload:
+    description: "Reload the config"
+    permission: ctp.reload
