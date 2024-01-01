@@ -28,3 +28,22 @@ scoreboard:
     - "&3line3"
     - "&4line4"
 #when you modify the scoreboard you should disconnect and reconnect to your server or wait a little bit
+
+
+#FEATURE
+#----------------------------------------------
+#templates:
+#  chatformat:
+#    exemple:
+#      name: "test"
+#      chatformat: "{player} >>> {message}"
+#    exemple2:
+#      name: "&43erer"
+#      chatformat: "{player} qpoiejfdpejp {message}"
+#  scoreboard:
+#    exemple:
+#      name: "exemples scoardboard"
+#      title: "test"
+#      lines:
+#        - "line1"
+#        - "line2"

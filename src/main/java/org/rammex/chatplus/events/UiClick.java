@@ -9,6 +9,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.rammex.chatplus.Chatplus;
+import org.rammex.chatplus.ui.TemplatesChatFormat;
 import org.rammex.chatplus.ui.adminpanel;
 
 public class UiClick implements Listener {
@@ -34,6 +35,14 @@ public class UiClick implements Listener {
                 whoClicked.closeInventory();
                 adminpanel.scoreboardpanel(whoClicked);
             }
-        };
+        }
+        if (title.equalsIgnoreCase("Chat Format")){
+            e.setCancelled(true);
+            e.setResult(Event.Result.DENY);
+            if(current.getType() == Material.ANVIL){
+                whoClicked.closeInventory();
+                TemplatesChatFormat.tmpltctft(whoClicked);
+            }
+        }
     }
 }

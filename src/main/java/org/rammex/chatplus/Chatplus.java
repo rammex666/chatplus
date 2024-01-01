@@ -1,6 +1,8 @@
 package org.rammex.chatplus;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -11,7 +13,12 @@ import org.rammex.chatplus.events.ChatFormat;
 import org.rammex.chatplus.events.PlayerJoin;
 import org.rammex.chatplus.events.UiClick;
 
+import java.io.File;
+import java.io.IOException;
+
 public final class Chatplus extends JavaPlugin {
+
+
 
     @Override
     public void onEnable() {
@@ -26,12 +33,15 @@ public final class Chatplus extends JavaPlugin {
         reloadConfig();
         getConfig();
         RefreshScoarBoard();
+
+
     }
 
     @Override
     public void onDisable() {
 
     }
+
 
     void logmessage() {
         getLogger().info("-----------");
