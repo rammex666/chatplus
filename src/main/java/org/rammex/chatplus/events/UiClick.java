@@ -7,17 +7,20 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.rammex.chatplus.Chatplus;
 import org.rammex.chatplus.ui.TemplatesChatFormat;
 import org.rammex.chatplus.ui.adminpanel;
+import org.rammex.chatplus.utils.PluginState;
 
 public class UiClick implements Listener {
     Chatplus plugin;
     public UiClick(Chatplus plugin) {
         this.plugin = plugin;
     }
+    private final PluginState pluginState = new PluginState();
 
     @EventHandler
     public void Uiclick(InventoryClickEvent e){
@@ -44,17 +47,41 @@ public class UiClick implements Listener {
                 whoClicked.closeInventory();
                 TemplatesChatFormat.tmpltctft(whoClicked);
             }
+            if(current.getType() == Material.CRAFTING_TABLE){
+                whoClicked.closeInventory();
+                pluginState.setWaitingForChat(true);
+                pluginState.setPlayerWaiting((Player) whoClicked);
+            }
+        }
+        if (title.equalsIgnoreCase("ScoreBoard")){
+            e.setCancelled(true);
+            e.setResult(Event.Result.DENY);
         }
         if (title.equalsIgnoreCase("Chat Format Templates")){
             e.setCancelled(true);
             e.setResult(Event.Result.DENY);
             if(current.getType() == Material.BOOK){
                 String name = current.getItemMeta().getDisplayName();
-                plugin.getConfig().set("chatformat.format",name);
+                plugin.getConfig().set("chatformat.format", name.toString());
+                plugin.saveConfig();
                 plugin.reloadConfig();
                 whoClicked.closeInventory();
                 whoClicked.sendMessage(ChatColor.GREEN +"Chat format set to -> " + name);
             }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerChat(AsyncPlayerChatEvent event) {
+        Player player = event.getPlayer();
+        if (pluginState.isWaitingForChat() && player.equals(pluginState.getPlayerWaiting())) {
+            player.sendMessage("Chat Format set to -> "+event.getMessage());
+            pluginState.setWaitingForChat(false);
+            pluginState.setPlayerWaiting(null);
+            plugin.getConfig().set("chatformat.format", event.getMessage().toString());
+            plugin.saveConfig();
+            plugin.reloadConfig();
+            event.setCancelled(true);
         }
     }
 }
