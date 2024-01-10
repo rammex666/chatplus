@@ -17,7 +17,7 @@ public class TemplatesChatFormat {
     static Chatplus plugin;
 
     public static void tmpltctft(Player player){
-        Inventory inv = Bukkit.createInventory(null, 54, "Chat Format");
+        Inventory inv = Bukkit.createInventory(null, 54, "Chat Format Templates");
 
         // Templates line 1
         inv.setItem(9, getItem(Material.BOOK, null,null));

@@ -1,5 +1,6 @@
 package org.rammex.chatplus.events;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -42,6 +43,17 @@ public class UiClick implements Listener {
             if(current.getType() == Material.ANVIL){
                 whoClicked.closeInventory();
                 TemplatesChatFormat.tmpltctft(whoClicked);
+            }
+        }
+        if (title.equalsIgnoreCase("Chat Format Templates")){
+            e.setCancelled(true);
+            e.setResult(Event.Result.DENY);
+            if(current.getType() == Material.BOOK){
+                String name = current.getItemMeta().getDisplayName();
+                plugin.getConfig().set("chatformat.format",name);
+                plugin.reloadConfig();
+                whoClicked.closeInventory();
+                whoClicked.sendMessage(ChatColor.GREEN +"Chat format set to -> " + name);
             }
         }
     }
