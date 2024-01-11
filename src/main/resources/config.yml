@@ -2,48 +2,28 @@
 # {player} will be replaced by the name of the player
 # {world} will be replaced by the world where the player is located
 # {message} will be replaced by the message of the player
-
+#
+# HEX COLOR CODE (1.16+):
+# exemple :
+#  \#EFB9F9
+# You need the backslash or it will not work
+#
 # You can use Placeholder API too
 
 chatformat:
-  format: "{player} >> {message}"
-
-#Send a message when a player join the server
+  format: '§e{player} \#EFB9F9=> &r{message}'
 join:
   enable: true
-  message: "&aWelcome {player} on {......}"
-
-
+  message: '&aWelcome {player} on {......}'
 banned-words:
-  - "stfu"
-  - "ez"
-  - "skillissue"
-
+  - stfu
+  - ez
+  - skillissue
 scoreboard:
   enable: true
-  title: "&n&lTitleOfTheScoreBoard"
+  title: '&n&lTitleOfTheScoreBoard'
   content:
-    - "&1line1"
-    - "&2line2"
-    - "&3line3"
-    - "&4line4"
-#when you modify the scoreboard you should disconnect and reconnect to your server or wait a little bit
-
-
-#FEATURE
-#----------------------------------------------
-#templates:
-#  chatformat:
-#    exemple:
-#      name: "test"
-#      chatformat: "{player} >>> {message}"
-#    exemple2:
-#      name: "&43erer"
-#      chatformat: "{player} qpoiejfdpejp {message}"
-#  scoreboard:
-#    exemple:
-#      name: "exemples scoardboard"
-#      title: "test"
-#      lines:
-#        - "line1"
-#        - "line2"
+    - '&1line1'
+    - '&2line2'
+    - '&3line3'
+    - '&4line4'

@@ -8,6 +8,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.rammex.chatplus.Chatplus;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.bukkit.Bukkit.getServer;
 
@@ -37,20 +39,36 @@ public class ChatFormat implements Listener {
         String playerName = event.getPlayer().getDisplayName();
         String world = event.getPlayer().getWorld().getName();
 
-        message = message.replace("&0", ChatColor.BLACK.toString()).replace("&1", ChatColor.DARK_BLUE.toString()).replace("&2", ChatColor.DARK_GREEN.toString()).replace("&3", ChatColor.DARK_AQUA.toString()).replace("&4", ChatColor.DARK_RED.toString()).replace("&5", ChatColor.DARK_PURPLE.toString()).replace("&6", ChatColor.GOLD.toString()).replace("&7", ChatColor.GRAY.toString()).replace("&8", ChatColor.DARK_GRAY.toString()).replace("&9", ChatColor.BLUE.toString()).replace("&a", ChatColor.GREEN.toString()).replace("&b", ChatColor.AQUA.toString()).replace("&c", ChatColor.RED.toString()).replace("&d", ChatColor.LIGHT_PURPLE.toString()).replace("&e", ChatColor.YELLOW.toString()).replace("&f", ChatColor.WHITE.toString()).replace("&l", ChatColor.BOLD.toString()).replace("&k", ChatColor.MAGIC.toString()).replace("&n", ChatColor.UNDERLINE.toString()).replace("&o", ChatColor.ITALIC.toString()).replace("&m", ChatColor.STRIKETHROUGH.toString()).replace("&r", ChatColor.RESET.toString());
+        message = hex(message);
 
-        message = PlaceholderAPI.setPlaceholders(event.getPlayer(), message).replace("&0", ChatColor.BLACK.toString()).replace("&1", ChatColor.DARK_BLUE.toString()).replace("&2", ChatColor.DARK_GREEN.toString()).replace("&3", ChatColor.DARK_AQUA.toString()).replace("&4", ChatColor.DARK_RED.toString()).replace("&5", ChatColor.DARK_PURPLE.toString()).replace("&6", ChatColor.GOLD.toString()).replace("&7", ChatColor.GRAY.toString()).replace("&8", ChatColor.DARK_GRAY.toString()).replace("&9", ChatColor.BLUE.toString()).replace("&a", ChatColor.GREEN.toString()).replace("&b", ChatColor.AQUA.toString()).replace("&c", ChatColor.RED.toString()).replace("&e", ChatColor.YELLOW.toString()).replace("&d", ChatColor.LIGHT_PURPLE.toString()).replace("&f", ChatColor.WHITE.toString()).replace("&l", ChatColor.BOLD.toString()).replace("&k", ChatColor.MAGIC.toString()).replace("&n", ChatColor.UNDERLINE.toString()).replace("&o", ChatColor.ITALIC.toString()).replace("&m", ChatColor.STRIKETHROUGH.toString()).replace("&r", ChatColor.RESET.toString());
+        message = PlaceholderAPI.setPlaceholders(event.getPlayer(), hex(message));
+        String formattedMessage = hex(this.plugin.getConfig().getString("chatformat.format").replace("\\","").replace("{player}", playerName).replace("{message}", message).replace("{world}", world));
 
-        String formattedMessage = this.plugin.getConfig().getString("chatformat.format").replace("{player}", playerName).replace("{message}", message).replace("{world}", world).replace("&0", ChatColor.BLACK.toString()).replace("&1", ChatColor.DARK_BLUE.toString()).replace("&2", ChatColor.DARK_GREEN.toString()).replace("&3", ChatColor.DARK_AQUA.toString()).replace("&4", ChatColor.DARK_RED.toString()).replace("&5", ChatColor.DARK_PURPLE.toString()).replace("&6", ChatColor.GOLD.toString()).replace("&7", ChatColor.GRAY.toString()).replace("&8", ChatColor.DARK_GRAY.toString()).replace("&9", ChatColor.BLUE.toString()).replace("&e", ChatColor.YELLOW.toString()).replace("&a", ChatColor.GREEN.toString()).replace("&b", ChatColor.AQUA.toString()).replace("&c", ChatColor.RED.toString()).replace("&d", ChatColor.LIGHT_PURPLE.toString()).replace("&f", ChatColor.WHITE.toString()).replace("&l", ChatColor.BOLD.toString()).replace("&k", ChatColor.MAGIC.toString()).replace("&n", ChatColor.UNDERLINE.toString()).replace("&o", ChatColor.ITALIC.toString()).replace("&m", ChatColor.STRIKETHROUGH.toString()).replace("&r", ChatColor.RESET.toString());
-
-
-        formattedMessage = PlaceholderAPI.setPlaceholders(event.getPlayer(), formattedMessage).replace("&0", ChatColor.BLACK.toString()).replace("&1", ChatColor.DARK_BLUE.toString()).replace("&2", ChatColor.DARK_GREEN.toString()).replace("&3", ChatColor.DARK_AQUA.toString()).replace("&4", ChatColor.DARK_RED.toString()).replace("&5", ChatColor.DARK_PURPLE.toString()).replace("&6", ChatColor.GOLD.toString()).replace("&7", ChatColor.GRAY.toString()).replace("&8", ChatColor.DARK_GRAY.toString()).replace("&9", ChatColor.BLUE.toString()).replace("&a", ChatColor.GREEN.toString()).replace("&b", ChatColor.AQUA.toString()).replace("&e", ChatColor.YELLOW.toString()).replace("&c", ChatColor.RED.toString()).replace("&d", ChatColor.LIGHT_PURPLE.toString()).replace("&f", ChatColor.WHITE.toString()).replace("&l", ChatColor.BOLD.toString()).replace("&k", ChatColor.MAGIC.toString()).replace("&n", ChatColor.UNDERLINE.toString()).replace("&o", ChatColor.ITALIC.toString()).replace("&m", ChatColor.STRIKETHROUGH.toString()).replace("&r", ChatColor.RESET.toString());;
-
+        formattedMessage = PlaceholderAPI.setPlaceholders(event.getPlayer(), formattedMessage);
         getServer().broadcastMessage(formattedMessage);
 
 
 
 
+    }
+
+    public static String hex(String message) {
+        Pattern pattern = Pattern.compile("(#[a-fA-F0-9]{6})");
+        Matcher matcher = pattern.matcher(message);
+        while (matcher.find()) {
+            String hexCode = message.substring(matcher.start(), matcher.end());
+            String replaceSharp = hexCode.replace('#', 'x');
+
+            char[] ch = replaceSharp.toCharArray();
+            StringBuilder builder = new StringBuilder("");
+            for (char c : ch) {
+                builder.append("&" + c);
+            }
+
+            message = message.replace(hexCode, builder.toString());
+            matcher = pattern.matcher(message);
+        }
+        return ChatColor.translateAlternateColorCodes('&', message).replace('&', '§');
     }
 
 

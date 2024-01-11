@@ -9,6 +9,8 @@ import org.rammex.chatplus.Chatplus;
 import org.rammex.chatplus.utils.ScoreHelper;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.bukkit.Bukkit.getServer;
 
@@ -28,7 +30,7 @@ public class PlayerJoin implements Listener {
             createScoreboard(player);
         }
         if(plugin.getConfig().getBoolean("join.enable")){
-            getServer().broadcastMessage(plugin.getConfig().getString("join.message").replace("{player}", player.getName()).replace("&e", ChatColor.YELLOW.toString()).replace("&0", ChatColor.BLACK.toString()).replace("&1", ChatColor.DARK_BLUE.toString()).replace("&2", ChatColor.DARK_GREEN.toString()).replace("&3", ChatColor.DARK_AQUA.toString()).replace("&4", ChatColor.DARK_RED.toString()).replace("&5", ChatColor.DARK_PURPLE.toString()).replace("&6", ChatColor.GOLD.toString()).replace("&7", ChatColor.GRAY.toString()).replace("&8", ChatColor.DARK_GRAY.toString()).replace("&9", ChatColor.BLUE.toString()).replace("&a", ChatColor.GREEN.toString()).replace("&b", ChatColor.AQUA.toString()).replace("&c", ChatColor.RED.toString()).replace("&d", ChatColor.LIGHT_PURPLE.toString()).replace("&f", ChatColor.WHITE.toString()).replace("&l", ChatColor.BOLD.toString()).replace("&k", ChatColor.MAGIC.toString()).replace("&n", ChatColor.UNDERLINE.toString()).replace("&o", ChatColor.ITALIC.toString()).replace("&m", ChatColor.STRIKETHROUGH.toString()).replace("&r", ChatColor.RESET.toString()));
+            getServer().broadcastMessage(hex(plugin.getConfig().getString("join.message").replace("\\","").replace("{player}", e.getPlayer().getName()).replace("{world}", e.getPlayer().getWorld().getName())));
             e.setJoinMessage("");
         }
     }
@@ -53,7 +55,26 @@ public class PlayerJoin implements Listener {
         helper.setTitle(plugin.getConfig().getString("scoreboard.title"));
         for (String line : lines) {
             c = c + 1;
-            helper.setSlot(c, line);
+            helper.setSlot(c, hex(line));
         }
+    }
+
+    public static String hex(String message) {
+        Pattern pattern = Pattern.compile("(#[a-fA-F0-9]{6})");
+        Matcher matcher = pattern.matcher(message);
+        while (matcher.find()) {
+            String hexCode = message.substring(matcher.start(), matcher.end());
+            String replaceSharp = hexCode.replace('#', 'x');
+
+            char[] ch = replaceSharp.toCharArray();
+            StringBuilder builder = new StringBuilder("");
+            for (char c : ch) {
+                builder.append("&" + c);
+            }
+
+            message = message.replace(hexCode, builder.toString());
+            matcher = pattern.matcher(message);
+        }
+        return ChatColor.translateAlternateColorCodes('&', message).replace('&', '§');
     }
 }
