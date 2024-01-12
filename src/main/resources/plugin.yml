@@ -15,3 +15,6 @@ commands:
   ctpreload:
     description: "Reload the config"
     permission: ctp.reload
+  csfchat:
+    description: "Staff Chat"
+    permission: ctp.sfchat

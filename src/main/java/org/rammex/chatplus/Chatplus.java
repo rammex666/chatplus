@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.rammex.chatplus.commands.csfchat;
 import org.rammex.chatplus.commands.ctpadmin;
 import org.rammex.chatplus.commands.ctphelp;
 import org.rammex.chatplus.commands.ctpreload;
@@ -26,6 +27,7 @@ public final class Chatplus extends JavaPlugin {
         this.getCommand("ctphelp").setExecutor(new ctphelp());
         this.getCommand("ctpadmin").setExecutor(new ctpadmin(this));
         this.getCommand("ctpreload").setExecutor(new ctpreload(this));
+        this.getCommand("csfchat").setExecutor(new csfchat(this));
         Bukkit.getPluginManager().registerEvents(new UiClick(this), this);
         Bukkit.getPluginManager().registerEvents(new ChatFormat(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(this), this);
