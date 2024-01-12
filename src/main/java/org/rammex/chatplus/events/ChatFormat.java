@@ -38,14 +38,34 @@ public class ChatFormat implements Listener {
 
         String playerName = event.getPlayer().getDisplayName();
         String world = event.getPlayer().getWorld().getName();
+        if(event.getPlayer().hasPermission("ctp.color")){
+            message = hex(message);
 
-        message = hex(message);
+            message = PlaceholderAPI.setPlaceholders(event.getPlayer(), hex(message));
+            String formattedMessage = hex(this.plugin.getConfig().getString("chatformat.format").replace("\\","").replace("{player}", playerName).replace("{message}", message).replace("{world}", world));
 
-        message = PlaceholderAPI.setPlaceholders(event.getPlayer(), hex(message));
-        String formattedMessage = hex(this.plugin.getConfig().getString("chatformat.format").replace("\\","").replace("{player}", playerName).replace("{message}", message).replace("{world}", world));
+            formattedMessage = PlaceholderAPI.setPlaceholders(event.getPlayer(), formattedMessage);
+            getServer().broadcastMessage(formattedMessage);
+        } else{
+            String chatFormat = this.plugin.getConfig().getString("chatformat.format");
 
-        formattedMessage = PlaceholderAPI.setPlaceholders(event.getPlayer(), formattedMessage);
-        getServer().broadcastMessage(formattedMessage);
+            String[] formatParts = chatFormat.split("\\{message\\}", 2);
+
+            if (formatParts.length == 2) {
+                String messagePart = formatParts[0];
+                String restPart = formatParts[1];
+
+                String formattedMessage = hex(messagePart) + message + hex(restPart);
+                formattedMessage = PlaceholderAPI.setPlaceholders(event.getPlayer(), formattedMessage.replace("\\","").replace("{player}", playerName).replace("{world}", world));
+                getServer().broadcastMessage(formattedMessage);
+            } else {
+                event.getPlayer().sendMessage("Erreur de format du chat. Veuillez contacter l'administrateur du serveur.");
+            }
+        }
+
+
+
+
 
 
 
