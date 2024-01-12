@@ -27,3 +27,15 @@ scoreboard:
     - '&2line2'
     - '&3line3'
     - '&4line4'
+
+
+groupschat:
+  french:
+    title: "§b[France]"
+    permission: "cgp.fr"
+  german:
+    title: "§6[Deutsch]"
+    permission: "cgp.de"
+  english:
+    title: "&2[English]"
+    permission: "cgp.en"
