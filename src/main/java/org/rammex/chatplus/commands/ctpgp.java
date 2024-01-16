@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.rammex.chatplus.Chatplus;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,28 +23,44 @@ public class ctpgp implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("Cette commande ne peut être exécutée que par un joueur.");
+            if(this.plugin.getConfig().getString("lang") == "en"){
+                sender.sendMessage(Objects.requireNonNull(hex(this.plugin.geten().getString("error_message.not_player"))));
+            } else if (this.plugin.getConfig().getString("lang") == "fr") {
+                sender.sendMessage(Objects.requireNonNull(hex(this.plugin.getfr().getString("error_message.not_player"))));
+            }
             return true;
         }
 
         Player player = (Player) sender;
 
         if (args.length < 1) {
-            player.sendMessage("Utilisation : /ctpgp <group>");
+            if(this.plugin.getConfig().getString("lang") == "en"){
+                player.sendMessage(Objects.requireNonNull(hex(this.plugin.geten().getString("commands_usage.ctpgp"))));
+            } else if (this.plugin.getConfig().getString("lang") == "fr") {
+                player.sendMessage(Objects.requireNonNull(hex(this.plugin.getfr().getString("commands_usage.ctpgp"))));
+            }
             return true;
         }
 
         String group = args[0].toLowerCase();
 
         if (!this.plugin.getConfig().contains("groupschat." + group)) {
-            player.sendMessage("This group doesn't exist.");
+            if(this.plugin.getConfig().getString("lang") == "en"){
+                player.sendMessage(Objects.requireNonNull(hex(this.plugin.geten().getString("error_message.group_not_exist"))));
+            } else if (this.plugin.getConfig().getString("lang") == "fr") {
+                player.sendMessage(Objects.requireNonNull(hex(this.plugin.getfr().getString("error_message.group_not_exist"))));
+            }
             return true;
         }
 
         String permission = this.plugin.getConfig().getString("groupschat." + group + ".permission");
 
         if (!player.hasPermission(permission)) {
-            player.sendMessage("You don't have permission to talk in this groupchat");
+            if(this.plugin.getConfig().getString("lang") == "en"){
+                player.sendMessage(Objects.requireNonNull(hex(this.plugin.geten().getString("error_message.no_perm"))));
+            } else if (this.plugin.getConfig().getString("lang") == "fr") {
+                player.sendMessage(Objects.requireNonNull(hex(this.plugin.getfr().getString("error_message.no_perm"))));
+            }
             return true;
         }
         String playerName = player.getName();

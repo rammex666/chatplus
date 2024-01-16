@@ -15,6 +15,10 @@ import java.io.File;
 import java.io.IOException;
 
 public final class Chatplus extends JavaPlugin {
+    File dir = getDataFolder();
+    File fr = new File(dir, "lang/fr.yml");
+    File en = new File(dir, "lang/en.yml");
+
 
 
 
@@ -33,8 +37,7 @@ public final class Chatplus extends JavaPlugin {
         reloadConfig();
         getConfig();
         RefreshScoarBoard();
-
-
+        loadfiles();
     }
 
     @Override
@@ -64,4 +67,36 @@ public final class Chatplus extends JavaPlugin {
 
         }.runTaskTimer(this, 2000L, 2000L);
     }
+
+    void loadfiles(){
+        if (!fr.exists()) {
+            try {
+                fr.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        if (!en.exists()) {
+            try {
+                en.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
+
+    public FileConfiguration getfr(){
+        FileConfiguration cfr = YamlConfiguration.loadConfiguration(fr);
+        return cfr;
+    }
+
+    public FileConfiguration geten(){
+        FileConfiguration cen = YamlConfiguration.loadConfiguration(en);
+        return cen;
+    }
+
+
+
 }

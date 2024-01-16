@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.rammex.chatplus.Chatplus;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,16 +22,28 @@ public class csfchat implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("Cette commande ne peut être exécutée que par un joueur.");
+            if(this.plugin.getConfig().getString("lang") == "en"){
+                sender.sendMessage(Objects.requireNonNull(hex(this.plugin.geten().getString("error_message.not_player"))));
+            } else if (this.plugin.getConfig().getString("lang") == "fr") {
+                sender.sendMessage(Objects.requireNonNull(hex(this.plugin.getfr().getString("error_message.not_player"))));
+            }
             return true;
         }
         Player player = (Player) sender;
         if (!player.hasPermission("sf.see")) {
-            player.sendMessage("Vous n'avez pas la permission d'utiliser cette commande.");
+            if(this.plugin.getConfig().getString("lang") == "en"){
+                player.sendMessage(Objects.requireNonNull(hex(this.plugin.geten().getString("error_message.no_perm"))));
+            } else if (this.plugin.getConfig().getString("lang") == "fr") {
+                player.sendMessage(Objects.requireNonNull(hex(this.plugin.getfr().getString("error_message.no_perm"))));
+            }
             return true;
         }
         if (args.length < 1) {
-            player.sendMessage("Utilisation : /schat <message>");
+            if(this.plugin.getConfig().getString("lang") == "en"){
+                player.sendMessage(Objects.requireNonNull(hex(this.plugin.geten().getString("commands_usage.sfchat"))));
+            } else if (this.plugin.getConfig().getString("lang") == "fr") {
+                player.sendMessage(Objects.requireNonNull(hex(this.plugin.getfr().getString("commands_usage.sfchat"))));
+            }
             return true;
         }
         StringBuilder messageBuilder = new StringBuilder();

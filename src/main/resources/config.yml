@@ -10,6 +10,10 @@
 #
 # You can use Placeholder API too
 
+
+#lang : en, fr
+lang: 'en'
+
 chatformat:
   format: '§e{player} \#EFB9F9=> &r{message}'
 join:
