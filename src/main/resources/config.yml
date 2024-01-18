@@ -43,3 +43,13 @@ groupschat:
   english:
     title: "&2[English]"
     permission: "cgp.en"
+
+
+tablist:
+  enable: true
+  header:
+    - '&aTest'
+    - '&1Test'
+  footer:
+    - '&5Test'
+    - '&3Test'

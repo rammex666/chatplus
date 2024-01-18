@@ -15,6 +15,8 @@ import org.rammex.chatplus.ui.TemplatesChatFormat;
 import org.rammex.chatplus.ui.adminpanel;
 import org.rammex.chatplus.utils.PluginState;
 
+import static org.rammex.chatplus.events.ChatFormat.hex;
+
 public class UiClick implements Listener {
     Chatplus plugin;
     public UiClick(Chatplus plugin) {
@@ -73,9 +75,15 @@ public class UiClick implements Listener {
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
+        String lang= this.plugin.getConfig().getString("lang");
         Player player = event.getPlayer();
         if (pluginState.isWaitingForChat() && player.equals(pluginState.getPlayerWaiting())) {
-            player.sendMessage("Chat Format set to -> "+event.getMessage());
+            if(lang.equals("en")){
+                player.sendMessage(hex(this.plugin.geten().getString("succesmessage.formatchange")+ event.getMessage()));
+            }
+            if(lang.equals("fr")){
+                player.sendMessage(hex(this.plugin.getfr().getString("succesmessage.formatchange")+ event.getMessage()));
+            }
             pluginState.setWaitingForChat(false);
             pluginState.setPlayerWaiting(null);
             plugin.getConfig().set("chatformat.format", event.getMessage().toString());

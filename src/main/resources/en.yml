@@ -1,0 +1,13 @@
+errormessage:
+  noperm: '&c&l[ChatPlus] ERROR NO PERMISSION TO EXECUTE THAT COMMAND'
+  notplayer: '&c&l[ChatPlus] ERROR ONLY PLAYER CAN EXECUTE THIS COMMAND'
+  groupnotexist: '&c&l[ChatPlus] ERROR THE GROUP DOESN''T EXIST'
+  messagebanned: '&c&l[ChatPlus] ERROR YOUR MESSAGE CONTAINS A BANNED WORD'
+
+succesmessage:
+  reload: '&a[ChatPlus] Config has been reloaded successfully !'
+  formatchange: '&a[ChatPlus] format set to -> '
+
+commandsusage:
+  sfchat: '&b[ChatPlus] sfchat usage -> /schat <message>'
+  ctpgp: '&b[ChatPlus] ctpgp usage -> /ctpgp <group> <message>'

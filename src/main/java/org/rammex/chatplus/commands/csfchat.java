@@ -19,30 +19,35 @@ public class csfchat implements CommandExecutor {
         this.plugin = plugin;
     }
 
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        String lang= this.plugin.getConfig().getString("lang");
         if (!(sender instanceof Player)) {
-            if(this.plugin.getConfig().getString("lang") == "en"){
-                sender.sendMessage(Objects.requireNonNull(hex(this.plugin.geten().getString("error_message.not_player"))));
-            } else if (this.plugin.getConfig().getString("lang") == "fr") {
-                sender.sendMessage(Objects.requireNonNull(hex(this.plugin.getfr().getString("error_message.not_player"))));
+            if(lang.equals("en")){
+                sender.sendMessage(hex(this.plugin.geten().getString("errormessage.notplayer")));
+            }
+            if(lang.equals("fr")){
+                sender.sendMessage(hex(this.plugin.getfr().getString("errormessage.notplayer")));
             }
             return true;
         }
         Player player = (Player) sender;
         if (!player.hasPermission("sf.see")) {
-            if(this.plugin.getConfig().getString("lang") == "en"){
-                player.sendMessage(Objects.requireNonNull(hex(this.plugin.geten().getString("error_message.no_perm"))));
-            } else if (this.plugin.getConfig().getString("lang") == "fr") {
-                player.sendMessage(Objects.requireNonNull(hex(this.plugin.getfr().getString("error_message.no_perm"))));
+            if(lang.equals("en")){
+                player.sendMessage(hex(this.plugin.geten().getString("errormessage.noperm")));
+            }
+            if(lang.equals("fr")){
+                player.sendMessage(hex(this.plugin.getfr().getString("errormessage.noperm")));
             }
             return true;
         }
         if (args.length < 1) {
-            if(this.plugin.getConfig().getString("lang") == "en"){
-                player.sendMessage(Objects.requireNonNull(hex(this.plugin.geten().getString("commands_usage.sfchat"))));
-            } else if (this.plugin.getConfig().getString("lang") == "fr") {
-                player.sendMessage(Objects.requireNonNull(hex(this.plugin.getfr().getString("commands_usage.sfchat"))));
+            if(lang.equals("en")){
+                player.sendMessage(hex(this.plugin.geten().getString("commandsusage.sfchat")));
+            }
+            if(lang.equals("fr")){
+                player.sendMessage(hex(this.plugin.getfr().getString("commandsusage.sfchat")));
             }
             return true;
         }

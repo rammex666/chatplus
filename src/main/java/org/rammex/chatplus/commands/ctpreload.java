@@ -20,14 +20,16 @@ public class ctpreload implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
+        String lang= this.plugin.getConfig().getString("lang");
         Player player = (Player) sender;
 
         this.plugin.reloadConfig();
 
-        if(this.plugin.getConfig().getString("lang") == "en"){
-            player.sendMessage(Objects.requireNonNull(hex(this.plugin.geten().getString("succes_message.reload"))));
-        } else if (this.plugin.getConfig().getString("lang") == "fr") {
-            player.sendMessage(Objects.requireNonNull(hex(this.plugin.getfr().getString("succes_message.reload"))));
+        if(lang.equals("en")){
+            player.sendMessage(hex(this.plugin.geten().getString("succesmessage.reload")));
+        }
+        if(lang.equals("fr")){
+            player.sendMessage(hex(this.plugin.getfr().getString("succesmessage.reload")));
         }
         return false;
     }

@@ -1,6 +1,7 @@
 package org.rammex.chatplus;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -16,14 +17,19 @@ import java.io.IOException;
 
 public final class Chatplus extends JavaPlugin {
     File dir = getDataFolder();
-    File fr = new File(dir, "lang/fr.yml");
-    File en = new File(dir, "lang/en.yml");
+    File fr = new File(dir+"/lang", "fr.yml");
+    File en = new File(dir+"/lang", "en.yml");
+    FileConfiguration frconf;
+    FileConfiguration enconf;
+
+
 
 
 
 
     @Override
     public void onEnable() {
+        dir.mkdirs();
         logmessage();
         this.getCommand("ctphelp").setExecutor(new ctphelp());
         this.getCommand("ctpadmin").setExecutor(new ctpadmin(this));
@@ -69,32 +75,41 @@ public final class Chatplus extends JavaPlugin {
     }
 
     void loadfiles(){
+        //fr
+        fr = new File(getDataFolder(), "fr.yml");
         if (!fr.exists()) {
-            try {
-                fr.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            fr.getParentFile().mkdirs();
+            saveResource("fr.yml", false);
         }
 
+        frconf = new YamlConfiguration();
+        try {
+            frconf.load(fr);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        // en
+        en = new File(getDataFolder(), "en.yml");
         if (!en.exists()) {
-            try {
-                en.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            en.getParentFile().mkdirs();
+            saveResource("en.yml", false);
         }
 
+        enconf = new YamlConfiguration();
+        try {
+            enconf.load(en);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
     }
 
     public FileConfiguration getfr(){
-        FileConfiguration cfr = YamlConfiguration.loadConfiguration(fr);
-        return cfr;
+        return this.frconf;
     }
 
     public FileConfiguration geten(){
-        FileConfiguration cen = YamlConfiguration.loadConfiguration(en);
-        return cen;
+        return this.enconf;
     }
 
 

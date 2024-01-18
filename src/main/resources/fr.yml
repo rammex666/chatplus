@@ -1,0 +1,13 @@
+errormessage:
+  noperm: '&c&l[ChatPlus] ERREUR VOUS N''AVEZ PAS LA PERMISSION D''EXECUTER CETTE COMMANDE'
+  notplayer: '&c&l[ChatPlus] ERREUR SEULEMENT LES JOUEUR PEUVENT EXECUTER CETTE COMMANDE'
+  groupnotexist: '&c&l[ChatPlus] ERREUR LE GROUP N''EXISTE PAS'
+  messagebanned: '&c&l[ChatPlus] ERREUR VOTRE MESSAGE CONTIENT UN MOT BANNI'
+
+succesmessage:
+  reload: '&a[ChatPlus] Config recharger avec succes !'
+  formatchange: '&a[ChatPlus] format de chat mit sur -> '
+
+commandsusage:
+  sfchat: '&b[ChatPlus] sfchat utilisation -> /schat <message>'
+  ctpgp: '&b[ChatPlus] ctpgp utilisation -> /ctpgp <group> <message>'

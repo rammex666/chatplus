@@ -1,6 +1,10 @@
 package org.rammex.chatplus.events;
 
+import de.Herbystar.TTA.TTA_Methods;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,6 +12,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.rammex.chatplus.Chatplus;
 import org.rammex.chatplus.utils.ScoreHelper;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,6 +39,10 @@ public class PlayerJoin implements Listener {
             getServer().broadcastMessage(hex(plugin.getConfig().getString("join.message").replace("\\","").replace("{player}", e.getPlayer().getName()).replace("{world}", e.getPlayer().getWorld().getName())));
             e.setJoinMessage("");
         }
+        if(plugin.getConfig().getBoolean("tablist.enable")){
+            TTA_Methods.sendAnimatedTablist(player, readHeaderListFromConfig("tablist.header",player),readHeaderListFromConfig("tablist.footer",player),10);
+        }
+
     }
 
     public static void updateScoreboard(Player player) {
@@ -76,5 +86,24 @@ public class PlayerJoin implements Listener {
             matcher = pattern.matcher(message);
         }
         return ChatColor.translateAlternateColorCodes('&', message).replace('&', '§');
+    }
+
+    private List<String> readHeaderListFromConfig(String path,Player player) {
+        FileConfiguration config = plugin.getConfig();
+        List<String> headerList = new ArrayList<>();
+
+        if (config.isList(path)) {
+            List<?> headerValues = config.getList(path);
+            if (headerValues != null) {
+                for (Object value : headerValues) {
+                    if (value instanceof String) {
+                        value = PlaceholderAPI.setPlaceholders(player, (String) value);
+                        headerList.add(hex((String) value));
+                    }
+                }
+            }
+        }
+
+        return headerList;
     }
 }

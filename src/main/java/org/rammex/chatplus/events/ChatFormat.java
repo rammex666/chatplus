@@ -25,13 +25,19 @@ public class ChatFormat implements Listener {
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
+        String lang= this.plugin.getConfig().getString("lang");
         event.setCancelled(true);
         List<String> bannedWords = plugin.getConfig().getStringList("banned-words");
         String message = event.getMessage();
         for (String bannedWord : bannedWords) {
             if (message.toLowerCase().contains(bannedWord.toLowerCase())) {
                 event.setCancelled(true);
-                event.getPlayer().sendMessage(ChatColor.RED + "Your Message Contains A Ban Word");
+                if(lang.equals("en")){
+                    event.getPlayer().sendMessage(hex(this.plugin.geten().getString("errormessage.messagebanned")));
+                }
+                if(lang.equals("fr")){
+                    event.getPlayer().sendMessage(hex(this.plugin.getfr().getString("errormessage.messagebanned")));
+                }
                 return;
             }
         }
@@ -58,8 +64,6 @@ public class ChatFormat implements Listener {
                 String formattedMessage = hex(messagePart) + message + hex(restPart);
                 formattedMessage = PlaceholderAPI.setPlaceholders(event.getPlayer(), formattedMessage.replace("\\","").replace("{player}", playerName).replace("{world}", world));
                 getServer().broadcastMessage(formattedMessage);
-            } else {
-                event.getPlayer().sendMessage("Erreur de format du chat. Veuillez contacter l'administrateur du serveur.");
             }
         }
 
