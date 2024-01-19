@@ -31,6 +31,9 @@ public class ctpreload implements CommandExecutor {
         if(lang.equals("fr")){
             player.sendMessage(hex(this.plugin.getfr().getString("succesmessage.reload")));
         }
+        if(lang.equals("de")){
+            player.sendMessage(hex(this.plugin.getde().getString("succesmessage.reload")));
+        }
         return false;
     }
 

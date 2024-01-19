@@ -1,0 +1,13 @@
+errormessage:
+  noperm: '&c&l[ChatPlus] FEHLER KEINE BERECHTIGUNG ZUR AUSFÜHRUNG DIESES BEFEHLS'
+  notplayer: '&c&l[ChatPlus] FEHLER NUR SPIELER KANN DIESEN BEFEHL AUSFÜHREN'
+  groupnotexist: '&c&l[ChatPlus] FEHLER DIE GRUPPE EXISTIERT NICHT'
+  messagebanned: '&c&l[ChatPlus] FEHLER IHRE NACHRICHT ENTHÄLT EIN VERBOTENES WORT'
+
+succesmessage:
+  reload: '&a[ChatPlus] Config wurde erfolgreich neu geladen !'
+  formatchange: '&a[ChatPlus] Format eingestellt auf -> '
+
+commandsusage:
+  sfchat: '&b[ChatPlus] sfchat Verwendung -> /schat <message>'
+  ctpgp: '&b[ChatPlus] ctpgp Verwendung -> /ctpgp <group> <message>'

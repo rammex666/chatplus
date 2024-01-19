@@ -30,6 +30,9 @@ public class csfchat implements CommandExecutor {
             if(lang.equals("fr")){
                 sender.sendMessage(hex(this.plugin.getfr().getString("errormessage.notplayer")));
             }
+            if(lang.equals("de")){
+                sender.sendMessage(hex(this.plugin.getde().getString("errormessage.notplayer")));
+            }
             return true;
         }
         Player player = (Player) sender;
@@ -40,6 +43,9 @@ public class csfchat implements CommandExecutor {
             if(lang.equals("fr")){
                 player.sendMessage(hex(this.plugin.getfr().getString("errormessage.noperm")));
             }
+            if(lang.equals("de")){
+                player.sendMessage(hex(this.plugin.getde().getString("errormessage.noperm")));
+            }
             return true;
         }
         if (args.length < 1) {
@@ -48,6 +54,9 @@ public class csfchat implements CommandExecutor {
             }
             if(lang.equals("fr")){
                 player.sendMessage(hex(this.plugin.getfr().getString("commandsusage.sfchat")));
+            }
+            if(lang.equals("de")){
+                player.sendMessage(hex(this.plugin.getde().getString("commandsusage.sfchat")));
             }
             return true;
         }

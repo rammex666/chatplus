@@ -11,7 +11,7 @@
 # You can use Placeholder API too
 
 
-#lang : en, fr
+#lang : en, fr, de
 lang: 'en'
 
 chatformat:
@@ -45,11 +45,6 @@ groupschat:
     permission: "cgp.en"
 
 
-tablist:
+motd:
   enable: true
-  header:
-    - '&aTest'
-    - '&1Test'
-  footer:
-    - '&5Test'
-    - '&3Test'
+  motd: '#50FACC &l&n<----ChatPlus MOTD---->'

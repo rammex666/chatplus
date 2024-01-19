@@ -40,7 +40,7 @@ public class PlayerJoin implements Listener {
             e.setJoinMessage("");
         }
         if(plugin.getConfig().getBoolean("tablist.enable")){
-            TTA_Methods.sendAnimatedTablist(player, readHeaderListFromConfig("tablist.header",player),readHeaderListFromConfig("tablist.footer",player),10);
+            TTA_Methods.sendAnimatedTablist(player, readHeaderListFromConfig("tablist.header",player),readHeaderListFromConfig("tablist.footer",player),5);
         }
 
     }

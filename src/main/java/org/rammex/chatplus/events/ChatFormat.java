@@ -38,6 +38,9 @@ public class ChatFormat implements Listener {
                 if(lang.equals("fr")){
                     event.getPlayer().sendMessage(hex(this.plugin.getfr().getString("errormessage.messagebanned")));
                 }
+                if(lang.equals("de")){
+                    event.getPlayer().sendMessage(hex(this.plugin.getde().getString("errormessage.messagebanned")));
+                }
                 return;
             }
         }

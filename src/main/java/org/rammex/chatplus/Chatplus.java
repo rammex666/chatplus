@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.rammex.chatplus.commands.*;
 import org.rammex.chatplus.events.ChatFormat;
+import org.rammex.chatplus.events.MotdModule;
 import org.rammex.chatplus.events.PlayerJoin;
 import org.rammex.chatplus.events.UiClick;
 
@@ -17,10 +18,12 @@ import java.io.IOException;
 
 public final class Chatplus extends JavaPlugin {
     File dir = getDataFolder();
-    File fr = new File(dir+"/lang", "fr.yml");
-    File en = new File(dir+"/lang", "en.yml");
+    File fr = new File(dir, "fr.yml");
+    File en = new File(dir, "en.yml");
+    File de = new File(dir, "de.yml");
     FileConfiguration frconf;
     FileConfiguration enconf;
+    FileConfiguration deconf;
 
 
 
@@ -31,7 +34,7 @@ public final class Chatplus extends JavaPlugin {
     public void onEnable() {
         dir.mkdirs();
         logmessage();
-        this.getCommand("ctphelp").setExecutor(new ctphelp());
+        this.getCommand("ctphelp").setExecutor(new ctphelp(this));
         this.getCommand("ctpadmin").setExecutor(new ctpadmin(this));
         this.getCommand("ctpreload").setExecutor(new ctpreload(this));
         this.getCommand("csfchat").setExecutor(new csfchat(this));
@@ -39,6 +42,7 @@ public final class Chatplus extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new UiClick(this), this);
         Bukkit.getPluginManager().registerEvents(new ChatFormat(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(this), this);
+        Bukkit.getPluginManager().registerEvents(new MotdModule(this), this);
         saveDefaultConfig();
         reloadConfig();
         getConfig();
@@ -55,7 +59,7 @@ public final class Chatplus extends JavaPlugin {
     void logmessage() {
         getLogger().info("-----------");
         getLogger().info("Plugin Created by .rammex");
-        getLogger().info("Version 1.0");
+        getLogger().info("Version 1.3.1");
         getLogger().info("-----------");
     }
 
@@ -76,10 +80,10 @@ public final class Chatplus extends JavaPlugin {
 
     void loadfiles(){
         //fr
-        fr = new File(getDataFolder(), "fr.yml");
+        fr = new File(getDataFolder()+"/lang", "fr.yml");
         if (!fr.exists()) {
             fr.getParentFile().mkdirs();
-            saveResource("fr.yml", false);
+            saveResource("lang/fr.yml", false);
         }
 
         frconf = new YamlConfiguration();
@@ -90,15 +94,28 @@ public final class Chatplus extends JavaPlugin {
         }
 
         // en
-        en = new File(getDataFolder(), "en.yml");
+        en = new File(getDataFolder()+"/lang", "en.yml");
         if (!en.exists()) {
             en.getParentFile().mkdirs();
-            saveResource("en.yml", false);
+            saveResource("lang/en.yml", false);
         }
 
         enconf = new YamlConfiguration();
         try {
             enconf.load(en);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+
+       de = new File(getDataFolder()+"/lang", "de.yml");
+        if (!de.exists()) {
+            de.getParentFile().mkdirs();
+            saveResource("lang/de.yml", false);
+        }
+
+        deconf = new YamlConfiguration();
+        try {
+            deconf.load(de);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
@@ -110,6 +127,10 @@ public final class Chatplus extends JavaPlugin {
 
     public FileConfiguration geten(){
         return this.enconf;
+    }
+
+    public FileConfiguration getde(){
+        return this.deconf;
     }
 
 

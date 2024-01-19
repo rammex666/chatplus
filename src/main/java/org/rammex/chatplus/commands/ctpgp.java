@@ -30,6 +30,9 @@ public class ctpgp implements CommandExecutor {
             if(lang.equals("fr")){
                 sender.sendMessage(hex(this.plugin.getfr().getString("errormessage.notplayer")));
             }
+            if(lang.equals("de")){
+                sender.sendMessage(hex(this.plugin.getde().getString("errormessage.notplayer")));
+            }
             return true;
         }
 
@@ -41,6 +44,9 @@ public class ctpgp implements CommandExecutor {
             }
             if(lang.equals("fr")){
                 player.sendMessage(hex(this.plugin.getfr().getString("commandsusage.ctpgp")));
+            }
+            if(lang.equals("de")){
+                player.sendMessage(hex(this.plugin.getde().getString("commandsusage.ctpgp")));
             }
             return true;
         }
@@ -54,6 +60,9 @@ public class ctpgp implements CommandExecutor {
             if(lang.equals("fr")){
                 player.sendMessage(hex(this.plugin.getfr().getString("errormessage.groupnotexist")));
             }
+            if(lang.equals("de")){
+                player.sendMessage(hex(this.plugin.getde().getString("errormessage.groupnotexist")));
+            }
             return true;
         }
 
@@ -65,6 +74,9 @@ public class ctpgp implements CommandExecutor {
             }
             if(lang.equals("fr")){
                 player.sendMessage(hex(this.plugin.getfr().getString("errormessage.noperm")));
+            }
+            if(lang.equals("de")){
+                player.sendMessage(hex(this.plugin.getde().getString("errormessage.noperm")));
             }
             return true;
         }

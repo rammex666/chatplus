@@ -84,6 +84,9 @@ public class UiClick implements Listener {
             if(lang.equals("fr")){
                 player.sendMessage(hex(this.plugin.getfr().getString("succesmessage.formatchange")+ event.getMessage()));
             }
+            if(lang.equals("de")){
+                player.sendMessage(hex(this.plugin.getde().getString("succesmessage.formatchange")+ event.getMessage()));
+            }
             pluginState.setWaitingForChat(false);
             pluginState.setPlayerWaiting(null);
             plugin.getConfig().set("chatformat.format", event.getMessage().toString());
