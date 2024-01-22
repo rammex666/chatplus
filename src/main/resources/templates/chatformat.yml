@@ -1,0 +1,11 @@
+templates:
+  template1:
+    title: "Template 1"
+    lore:
+      - "Line 1"
+      - "Line 2"
+  template2:
+    title: "Template 2"
+    lore:
+      - "Line A"
+      - "Line B"

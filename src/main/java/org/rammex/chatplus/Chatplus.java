@@ -21,12 +21,11 @@ public final class Chatplus extends JavaPlugin {
     File fr = new File(dir, "fr.yml");
     File en = new File(dir, "en.yml");
     File de = new File(dir, "de.yml");
+    File ct = new File(dir, "chatformat.yml");
     FileConfiguration frconf;
     FileConfiguration enconf;
     FileConfiguration deconf;
-
-
-
+    FileConfiguration ctconf;
 
 
 
@@ -119,6 +118,20 @@ public final class Chatplus extends JavaPlugin {
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
+
+
+        ct = new File(getDataFolder()+"/templates", "chatformat.yml");
+        if (!ct.exists()) {
+            ct.getParentFile().mkdirs();
+            saveResource("templates/chatformat.yml", false);
+        }
+
+        ctconf = new YamlConfiguration();
+        try {
+            ctconf.load(ct);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
     }
 
     public FileConfiguration getfr(){
@@ -131,6 +144,9 @@ public final class Chatplus extends JavaPlugin {
 
     public FileConfiguration getde(){
         return this.deconf;
+    }
+    public FileConfiguration getct(){
+        return this.ctconf;
     }
 
 
