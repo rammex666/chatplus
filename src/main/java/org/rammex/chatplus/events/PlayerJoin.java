@@ -39,10 +39,6 @@ public class PlayerJoin implements Listener {
             getServer().broadcastMessage(hex(plugin.getConfig().getString("join.message").replace("\\","").replace("{player}", e.getPlayer().getName()).replace("{world}", e.getPlayer().getWorld().getName())));
             e.setJoinMessage("");
         }
-        if(plugin.getConfig().getBoolean("tablist.enable")){
-            TTA_Methods.sendAnimatedTablist(player, readHeaderListFromConfig("tablist.header",player),readHeaderListFromConfig("tablist.footer",player),5);
-        }
-
     }
 
     public static void updateScoreboard(Player player) {

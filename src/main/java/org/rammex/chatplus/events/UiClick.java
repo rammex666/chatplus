@@ -73,13 +73,14 @@ public class UiClick implements Listener {
                 ConfigurationSection templatesSection = plugin.getct().getConfigurationSection("templates");
                 for (String templateName : templatesSection.getKeys(false)) {
                     String titlee = ChatColor.stripColor(templatesSection.getString(templateName + ".title"));
+                    String ctf = templatesSection.getString(templateName + ".format");
 
                     if (titlee != null && titlee.equalsIgnoreCase(current.getItemMeta().getDisplayName())) {
-                        plugin.getConfig().set("chatformat.format", current.getItemMeta().getDisplayName().toString());
+                        plugin.getConfig().set("chatformat.format", ctf);
                         plugin.saveConfig();
                         plugin.reloadConfig();
                         whoClicked.closeInventory();
-                        whoClicked.sendMessage(ChatColor.GREEN +"Chat format set to -> " + current.getItemMeta().getDisplayName());
+                        whoClicked.sendMessage(ChatColor.GREEN +"Chat format set to -> " + ctf);
                         break;
                     }
                 }
@@ -153,23 +154,43 @@ public class UiClick implements Listener {
                 String title = templatesSection.getString(templateName + ".title");
                 List<String> lore = templatesSection.getStringList(templateName + ".lore");
 
-                ItemStack itemStack = new ItemStack(Material.BOOK);
+                String ctf = templatesSection.getString(templateName + ".format");
+                if (plugin.getConfig().getString("chatformat.format") == ctf) {
+                    ItemStack itemStack = new ItemStack(Material.ENCHANTED_BOOK);
+                    ItemMeta itemMeta = itemStack.getItemMeta();
 
-                ItemMeta itemMeta = itemStack.getItemMeta();
+                    if (title != null) {
+                        itemMeta.setDisplayName(hex(title));
+                    }
 
-                if (title != null) {
-                    itemMeta.setDisplayName(hex(title));
+                    if (lore != null && !lore.isEmpty()) {
+                        itemMeta.setLore(lore);
+                    }
+
+                    itemStack.setItemMeta(itemMeta);
+
+                    inv.setItem(8 + n, itemStack);
+
+                    plugin.getLogger().info("Item added - Title: " + title + ", Lore: " + lore);
+                } else{
+                    ItemStack itemStack = new ItemStack(Material.BOOK);
+                    ItemMeta itemMeta = itemStack.getItemMeta();
+
+                    if (title != null) {
+                        itemMeta.setDisplayName(hex(title));
+                    }
+
+                    if (lore != null && !lore.isEmpty()) {
+                        itemMeta.setLore(lore);
+                    }
+
+                    itemStack.setItemMeta(itemMeta);
+
+                    inv.setItem(8 + n, itemStack);
+
+                    plugin.getLogger().info("Item added - Title: " + title + ", Lore: " + lore);
                 }
 
-                if (lore != null && !lore.isEmpty()) {
-                    itemMeta.setLore(lore);
-                }
-
-                itemStack.setItemMeta(itemMeta);
-
-                inv.setItem(8 + n, itemStack);
-
-                plugin.getLogger().info("Item added - Title: " + title + ", Lore: " + lore);
             }
         } else{
             plugin.getLogger().info("null");
