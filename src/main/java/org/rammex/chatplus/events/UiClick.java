@@ -17,7 +17,9 @@ import org.rammex.chatplus.Chatplus;
 import org.rammex.chatplus.ui.adminpanel;
 import org.rammex.chatplus.utils.PluginState;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import static org.rammex.chatplus.events.ChatFormat.hex;
@@ -73,7 +75,7 @@ public class UiClick implements Listener {
                 ConfigurationSection templatesSection = plugin.getct().getConfigurationSection("templates");
                 for (String templateName : templatesSection.getKeys(false)) {
                     String titlee = ChatColor.stripColor(templatesSection.getString(templateName + ".title"));
-                    String ctf = templatesSection.getString(templateName + ".format");
+                    String ctf = templatesSection.getString(templateName + ".chatformat");
 
                     if (titlee != null && titlee.equalsIgnoreCase(current.getItemMeta().getDisplayName())) {
                         plugin.getConfig().set("chatformat.format", ctf);
@@ -121,12 +123,21 @@ public class UiClick implements Listener {
         inv.setItem(0, getItem(Material.BARRIER, ChatColor.RED + "Back", null));
         inv.setItem(1, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
         inv.setItem(2, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
-        inv.setItem(3, getItem(Material.PAPER, ChatColor.RED + "Soon", null));
         inv.setItem(4, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
         inv.setItem(5, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
         inv.setItem(6, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
         inv.setItem(7, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
         inv.setItem(8, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
+
+
+        ItemStack itemStack = new ItemStack(Material.PAPER);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(hex("#11B186&l&nActual Display Name"));
+        List<String> lore = Collections.singletonList(hex(plugin.getConfig().getString("chatformat.format")).toString());
+        itemMeta.setLore(lore);
+        itemStack.setItemMeta(itemMeta);
+        inv.setItem(3,itemStack);
+
 
         player.openInventory(inv);
     }
@@ -154,8 +165,8 @@ public class UiClick implements Listener {
                 String title = templatesSection.getString(templateName + ".title");
                 List<String> lore = templatesSection.getStringList(templateName + ".lore");
 
-                String ctf = templatesSection.getString(templateName + ".format");
-                if (plugin.getConfig().getString("chatformat.format") == ctf) {
+                String ctf = templatesSection.getString(templateName + ".chatformat");
+                if (Objects.equals(plugin.getConfig().getString("chatformat.format"), ctf)) {
                     ItemStack itemStack = new ItemStack(Material.ENCHANTED_BOOK);
                     ItemMeta itemMeta = itemStack.getItemMeta();
 
@@ -164,14 +175,14 @@ public class UiClick implements Listener {
                     }
 
                     if (lore != null && !lore.isEmpty()) {
-                        itemMeta.setLore(lore);
+                        itemMeta.setLore(Collections.singletonList(hex(lore.toString())));
                     }
 
                     itemStack.setItemMeta(itemMeta);
 
                     inv.setItem(8 + n, itemStack);
 
-                    plugin.getLogger().info("Item added - Title: " + title + ", Lore: " + lore);
+                    plugin.getLogger().info("Item added ctf - Title: " + title + ", Lore: " + lore);
                 } else{
                     ItemStack itemStack = new ItemStack(Material.BOOK);
                     ItemMeta itemMeta = itemStack.getItemMeta();
@@ -181,14 +192,14 @@ public class UiClick implements Listener {
                     }
 
                     if (lore != null && !lore.isEmpty()) {
-                        itemMeta.setLore(lore);
+                        itemMeta.setLore(Collections.singletonList(hex(lore.toString())));
                     }
 
                     itemStack.setItemMeta(itemMeta);
 
                     inv.setItem(8 + n, itemStack);
 
-                    plugin.getLogger().info("Item added - Title: " + title + ", Lore: " + lore);
+                    plugin.getLogger().info("Item added no ctf - Title: " + title + ", Lore: " + lore);
                 }
 
             }

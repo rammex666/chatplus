@@ -1,11 +1,221 @@
 templates:
   template1:
-    title: "Template 1"
+    chatformat: "#11B186{player} #E0E0E0>> #FFFFFF{message}"
+    title: "Template 31"
     lore:
-      - "Line 1"
-      - "Line 2"
+      - "#11B186{player} #E0E0E0>> #FFFFFF{message}"
   template2:
+    chatformat: "#A94442{player} #D6E9C6>> #8A6D3B{message}"
     title: "Template 2"
     lore:
-      - "Line A"
-      - "Line B"
+      - "#A94442{player} #D6E9C6>> #8A6D3B{message}"
+  template3:
+    chatformat: "#446CB3{player} #F9EBB2>> #C9C9C9{message}"
+    title: "Template 3"
+    lore:
+      - "#446CB3{player} #F9EBB2>> #C9C9C9{message}"
+  template4:
+    chatformat: "#356635{player} #D3D3D3>> #A52A2A{message}"
+    title: "Template 4"
+    lore:
+      - "#356635{player} #D3D3D3>> #A52A2A{message}"
+  template5:
+    chatformat: "#4A235A{player} #E0E0E0>> #FDFEFE{message}"
+    title: "Template 5"
+    lore:
+      - "#4A235A{player} #E0E0E0>> #FDFEFE{message}"
+  template6:
+    chatformat: "#CB4335{player} #D6E9C6>> #F0B27A{message}"
+    title: "Template 6"
+    lore:
+      - "#CB4335{player} #D6E9C6>> #F0B27A{message}"
+  template7:
+    chatformat: "#138D75{player} #F9EBB2>> #D5F5E3{message}"
+    title: "Template 7"
+    lore:
+      - "#138D75{player} #F9EBB2>> #D5F5E3{message}"
+  template8:
+    chatformat: "#F39C12{player} #D3D3D3>> #A93226{message}"
+    title: "Template 8"
+    lore:
+      - "#F39C12{player} #D3D3D3>> #A93226{message}"
+  template9:
+    chatformat: "#28B463{player} #F0F3F4>> #641E16{message}"
+    title: "Template 9"
+    lore:
+      - "#28B463{player} #F0F3F4>> #641E16{message}"
+  template10:
+    chatformat: "#D98880{player} #D6E9C6>> #D98880{message}"
+    title: "Template 10"
+    lore:
+      - "#D98880{player} #D6E9C6>> #D98880{message}"
+  template11:
+    chatformat: "#D5F5E3{player} #D3D3D3>> #F39C12{message}"
+    title: "Template 11"
+    lore:
+      - "#D5F5E3{player} #D3D3D3>> #F39C12{message}"
+  template12:
+    chatformat: "#F8C471{player} #D3D3D3>> #A93226{message}"
+    title: "Template 12"
+    lore:
+      - "#F8C471{player} #D3D3D3>> #A93226{message}"
+  template13:
+    chatformat: "#3498DB{player} #F9EBB2>> #C9C9C9{message}"
+    title: "Template 13"
+    lore:
+      - "#3498DB{player} #F9EBB2>> #C9C9C9{message}"
+  template14:
+    chatformat: "#8E44AD{player} #E0E0E0>> #FDFEFE{message}"
+    title: "Template 14"
+    lore:
+      - "#8E44AD{player} #E0E0E0>> #FDFEFE{message}"
+  template15:
+    chatformat: "#E74C3C{player} #D6E9C6>> #F0B27A{message}"
+    title: "Template 15"
+    lore:
+      - "#E74C3C{player} #D6E9C6>> #F0B27A{message}"
+  template16:
+    chatformat: "#1ABC9C{player} #F9EBB2>> #D5F5E3{message}"
+    title: "Template 16"
+    lore:
+      - "#1ABC9C{player} #F9EBB2>> #D5F5E3{message}"
+  template17:
+    chatformat: "#F39C12{player} #D3D3D3>> #A93226{message}"
+    title: "Template 17"
+    lore:
+      - "#F39C12{player} #D3D3D3>> #A93226{message}"
+  template18:
+    chatformat: "#2E86C1{player} #F9EBB2>> #C9C9C9{message}"
+    title: "Template 18"
+    lore:
+      - "#2E86C1{player} #F9EBB2>> #C9C9C9{message}"
+  template19:
+    chatformat: "#EC7063{player} #D3D3D3>> #F39C12{message}"
+    title: "Template 19"
+    lore:
+      - "#EC7063{player} #D3D3D3>> #F39C12{message}"
+  template20:
+    chatformat: "#27AE60{player} #F0F3F4>> #641E16{message}"
+    title: "Template 20"
+    lore:
+      - "#27AE60{player} #F0F3F4>> #641E16{message}"
+  template21:
+    chatformat: "#F0B27A{player} #D6E9C6>> #F8C471{message}"
+    title: "Template 21"
+    lore:
+      - "#F0B27A{player} #D6E9C6>> #F8C471{message}"
+  template22:
+    chatformat: "#3498DB{player} #F9EBB2>> #C9C9C9{message}"
+    title: "Template 22"
+    lore:
+      - "#3498DB{player} #F9EBB2>> #C9C9C9{message}"
+  template23:
+    chatformat: "#8E44AD{player} #E0E0E0>> #FDFEFE{message}"
+    title: "Template 23"
+    lore:
+      - "#8E44AD{player} #E0E0E0>> #FDFEFE{message}"
+  template24:
+    chatformat: "#E74C3C{player} #D6E9C6>> #F0B27A{message}"
+    title: "Template 24"
+    lore:
+      - "#E74C3C{player} #D6E9C6>> #F0B27A{message}"
+  template25:
+    chatformat: "#1ABC9C{player} #F9EBB2>> #D5F5E3{message}"
+    title: "Template 25"
+    lore:
+      - "#1ABC9C{player} #F9EBB2>> #D5F5E3{message}"
+  template26:
+    chatformat: "#F39C12{player} #D3D3D3>> #A93226{message}"
+    title: "Template 26"
+    lore:
+      - "#F39C12{player} #D3D3D3>> #A93226{message}"
+  template27:
+    chatformat: "#2E86C1{player} #F9EBB2>> #C9C9C9{message}"
+    title: "Template 27"
+    lore:
+      - "#2E86C1{player} #F9EBB2>> #C9C9C9{message}"
+  template28:
+    chatformat: "#EC7063{player} #D3D3D3>> #F39C12{message}"
+    title: "Template 28"
+    lore:
+      - "#EC7063{player} #D3D3D3>> #F39C12{message}"
+  template29:
+    chatformat: "#27AE60{player} #F0F3F4>> #641E16{message}"
+    title: "Template 29"
+    lore:
+      - "#27AE60{player} #F0F3F4>> #641E16{message}"
+  template30:
+    chatformat: "#F0B27A{player} #D6E9C6>> #F8C471{message}"
+    title: "Template 30"
+    lore:
+      - "#F0B27A{player} #D6E9C6>> #F8C471{message}"
+  template31:
+    chatformat: "#3498DB{player} #F9EBB2>> #C9C9C9{message}"
+    title: "Template 31"
+    lore:
+      - "#3498DB{player} #F9EBB2>> #C9C9C9{message}"
+  template32:
+    chatformat: "#8E44AD{player} #E0E0E0>> #FDFEFE{message}"
+    title: "Template 32"
+    lore:
+      - "#8E44AD{player} #E0E0E0>> #FDFEFE{message}"
+  template33:
+    chatformat: "#E74C3C{player} #D6E9C6>> #F0B27A{message}"
+    title: "Template 33"
+    lore:
+      - "#E74C3C{player} #D6E9C6>> #F0B27A{message}"
+  template34:
+    chatformat: "#1ABC9C{player} #F9EBB2>> #D5F5E3{message}"
+    title: "Template 34"
+    lore:
+      - "#1ABC9C{player} #F9EBB2>> #D5F5E3{message}"
+  template35:
+    chatformat: "#F39C12{player} #D3D3D3>> #A93226{message}"
+    title: "Template 35"
+    lore:
+      - "#F39C12{player} #D3D3D3>> #A93226{message}"
+  template36:
+    chatformat: "#2E86C1{player} #F9EBB2>> #C9C9C9{message}"
+    title: "Template 36"
+    lore:
+      - "#2E86C1{player} #F9EBB2>> #C9C9C9{message}"
+  template37:
+    chatformat: "#EC7063{player} #D3D3D3>> #F39C12{message}"
+    title: "Template 37"
+    lore:
+      - "#EC7063{player} #D3D3D3>> #F39C12{message}"
+  template38:
+    chatformat: "#27AE60{player} #F0F3F4>> #641E16{message}"
+    title: "Template 38"
+    lore:
+      - "#27AE60{player} #F0F3F4>> #641E16{message}"
+  template39:
+    chatformat: "#F0B27A{player} #D6E9C6>> #F8C471{message}"
+    title: "Template 39"
+    lore:
+      - "#F0B27A{player} #D6E9C6>> #F8C471{message}"
+  template40:
+    chatformat: "#3498DB{player} #F9EBB2>> #C9C9C9{message}"
+    title: "Template 40"
+    lore:
+      - "#3498DB{player} #F9EBB2>> #C9C9C9{message}"
+  template41:
+    chatformat: "#8E44AD{player} #E0E0E0>> #FDFEFE{message}"
+    title: "Template 41"
+    lore:
+      - "#8E44AD{player} #E0E0E0>> #FDFEFE{message}"
+  template42:
+    chatformat: "#E74C3C{player} #D6E9C6>> #F0B27A{message}"
+    title: "Template 42"
+    lore:
+      - "#E74C3C{player} #D6E9C6>> #F0B27A{message}"
+  template43:
+    chatformat: "#1ABC9C{player} #F9EBB2>> #D5F5E3{message}"
+    title: "Template 43"
+    lore:
+      - "#1ABC9C{player} #F9EBB2>> #D5F5E3{message}"
+  template44:
+    chatformat: "#F39C12{player} #D3D3D3>> #A93226{message}"
+    title: "Template 44"
+    lore:
+      - "#F39C12{player} #D3D3D3>> #A93226{message}"
