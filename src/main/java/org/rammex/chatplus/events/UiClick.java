@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.rammex.chatplus.Chatplus;
 import org.rammex.chatplus.ui.adminpanel;
 import org.rammex.chatplus.utils.PluginState;
+import org.rammex.chatplus.utils.SkullUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,11 +43,11 @@ public class UiClick implements Listener {
         if (title.equalsIgnoreCase("Admin Panel")){
             e.setCancelled(true);
             e.setResult(Event.Result.DENY);
-            if(current.getType() == Material.PAPER){
+            if(current.getItemMeta().getDisplayName().equals(ChatColor.RED+"Chat Format")){
                 whoClicked.closeInventory();
                 adminpanel.chatformatpanel(whoClicked);
             }
-            if(current.getType() == Material.BOOK){
+            if(current.getItemMeta().getDisplayName().equals(ChatColor.RED+"ScoreBoard")){
                 whoClicked.closeInventory();
                 adminpanel.scoreboardpanel(whoClicked);
             }
@@ -54,11 +55,11 @@ public class UiClick implements Listener {
         if (title.equalsIgnoreCase("Chat Format")){
             e.setCancelled(true);
             e.setResult(Event.Result.DENY);
-            if(current.getType() == Material.ANVIL){
+            if(current.getItemMeta().getDisplayName().equals("Templates")){
                 whoClicked.closeInventory();
                 tmpltctft(whoClicked);
             }
-            if(current.getType() == Material.CRAFTING_TABLE){
+            if(current.getItemMeta().getDisplayName().equals("Change")){
                 whoClicked.closeInventory();
                 pluginState.setWaitingForChat(true);
                 pluginState.setPlayerWaiting((Player) whoClicked);
@@ -86,6 +87,10 @@ public class UiClick implements Listener {
                         break;
                     }
                 }
+            }
+            if(current.getItemMeta().getDisplayName().equals(ChatColor.RED+"Back")){
+                whoClicked.closeInventory();
+                adminpanel.chatformatpanel(whoClicked);
             }
         }
     }

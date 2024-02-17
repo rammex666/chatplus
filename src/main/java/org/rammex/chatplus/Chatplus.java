@@ -12,9 +12,11 @@ import org.rammex.chatplus.events.ChatFormat;
 import org.rammex.chatplus.events.MotdModule;
 import org.rammex.chatplus.events.PlayerJoin;
 import org.rammex.chatplus.events.UiClick;
+import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 public final class Chatplus extends JavaPlugin {
     File dir = getDataFolder();
@@ -149,6 +151,6 @@ public final class Chatplus extends JavaPlugin {
         return this.ctconf;
     }
 
-
+    
 
 }
