@@ -2,14 +2,13 @@ package org.rammex.chatplus.ui;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
+
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.rammex.chatplus.utils.SkullUtils;
 
 import static org.rammex.chatplus.utils.ColorUtil.hex;
 import static org.rammex.chatplus.utils.ItemBuilder.getSimpleItem;
-import static org.rammex.chatplus.utils.ItemBuilder.getSimpleMaterialItem;
 
 public class settingspanel {
 
