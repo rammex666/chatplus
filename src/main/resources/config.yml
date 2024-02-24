@@ -17,14 +17,14 @@ lang: 'en'
 chatformat:
   format: '§e{player} \#EFB9F9=> &r{message}'
 join:
-  enable: true
+  enable: false
   message: '&aWelcome {player} on {......}'
 banned-words:
   - stfu
   - ez
   - skillissue
 scoreboard:
-  enable: true
+  enable: false
   title: '&n&lTitleOfTheScoreBoard'
   content:
     - '&1line1'
@@ -46,5 +46,5 @@ groupschat:
 
 
 motd:
-  enable: true
+  enable: false
   motd: '#50FACC &l&n<----ChatPlus MOTD---->'

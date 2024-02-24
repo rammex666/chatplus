@@ -1,16 +1,14 @@
 package org.rammex.chatplus.commands;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.rammex.chatplus.Chatplus;
 
-import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static org.rammex.chatplus.utils.ColorUtil.hex;
 
 public class ctpgp implements CommandExecutor {
     Chatplus plugin;
@@ -106,22 +104,5 @@ public class ctpgp implements CommandExecutor {
         return true;
     }
 
-    public static String hex(String message) {
-        Pattern pattern = Pattern.compile("(#[a-fA-F0-9]{6})");
-        Matcher matcher = pattern.matcher(message);
-        while (matcher.find()) {
-            String hexCode = message.substring(matcher.start(), matcher.end());
-            String replaceSharp = hexCode.replace('#', 'x');
 
-            char[] ch = replaceSharp.toCharArray();
-            StringBuilder builder = new StringBuilder("");
-            for (char c : ch) {
-                builder.append("&" + c);
-            }
-
-            message = message.replace(hexCode, builder.toString());
-            matcher = pattern.matcher(message);
-        }
-        return ChatColor.translateAlternateColorCodes('&', message).replace('&', '§');
-    }
 }

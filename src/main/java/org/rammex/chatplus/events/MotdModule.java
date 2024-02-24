@@ -5,7 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.rammex.chatplus.Chatplus;
 
-import static org.rammex.chatplus.events.ChatFormat.hex;
+import static org.rammex.chatplus.utils.ColorUtil.hex;
 
 public class MotdModule implements Listener {
 

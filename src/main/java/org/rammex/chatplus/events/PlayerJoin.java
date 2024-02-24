@@ -1,10 +1,6 @@
 package org.rammex.chatplus.events;
 
 
-import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,13 +8,10 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.rammex.chatplus.Chatplus;
 import org.rammex.chatplus.utils.ScoreHelper;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.bukkit.Bukkit.getServer;
+import static org.rammex.chatplus.utils.ColorUtil.hex;
 
 public class PlayerJoin implements Listener {
 
@@ -65,41 +58,5 @@ public class PlayerJoin implements Listener {
         }
     }
 
-    public static String hex(String message) {
-        Pattern pattern = Pattern.compile("(#[a-fA-F0-9]{6})");
-        Matcher matcher = pattern.matcher(message);
-        while (matcher.find()) {
-            String hexCode = message.substring(matcher.start(), matcher.end());
-            String replaceSharp = hexCode.replace('#', 'x');
 
-            char[] ch = replaceSharp.toCharArray();
-            StringBuilder builder = new StringBuilder("");
-            for (char c : ch) {
-                builder.append("&" + c);
-            }
-
-            message = message.replace(hexCode, builder.toString());
-            matcher = pattern.matcher(message);
-        }
-        return ChatColor.translateAlternateColorCodes('&', message).replace('&', '§');
-    }
-
-    private List<String> readHeaderListFromConfig(String path,Player player) {
-        FileConfiguration config = plugin.getConfig();
-        List<String> headerList = new ArrayList<>();
-
-        if (config.isList(path)) {
-            List<?> headerValues = config.getList(path);
-            if (headerValues != null) {
-                for (Object value : headerValues) {
-                    if (value instanceof String) {
-                        value = PlaceholderAPI.setPlaceholders(player, (String) value);
-                        headerList.add(hex((String) value));
-                    }
-                }
-            }
-        }
-
-        return headerList;
-    }
 }

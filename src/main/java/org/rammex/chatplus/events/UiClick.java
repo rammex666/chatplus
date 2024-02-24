@@ -16,14 +16,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.rammex.chatplus.Chatplus;
 import org.rammex.chatplus.ui.adminpanel;
 import org.rammex.chatplus.utils.PluginState;
-import org.rammex.chatplus.utils.SkullUtils;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-
-import static org.rammex.chatplus.events.ChatFormat.hex;
+import static org.rammex.chatplus.utils.ColorUtil.hex;
+import static org.rammex.chatplus.utils.ItemBuilder.getMaterialLoreItem;
 
 public class UiClick implements Listener {
     Chatplus plugin;
@@ -61,6 +59,7 @@ public class UiClick implements Listener {
             }
             if(current.getItemMeta().getDisplayName().equals("Change")){
                 whoClicked.closeInventory();
+                whoClicked.sendMessage(ChatColor.YELLOW +"Please enter the new chat format in the chat");
                 pluginState.setWaitingForChat(true);
                 pluginState.setPlayerWaiting((Player) whoClicked);
             }
@@ -125,14 +124,14 @@ public class UiClick implements Listener {
         generateItems(inv);
 
         // top
-        inv.setItem(0, getItem(Material.BARRIER, ChatColor.RED + "Back", null));
-        inv.setItem(1, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
-        inv.setItem(2, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
-        inv.setItem(4, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
-        inv.setItem(5, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
-        inv.setItem(6, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
-        inv.setItem(7, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
-        inv.setItem(8, getItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
+        inv.setItem(0, getMaterialLoreItem(Material.BARRIER, ChatColor.RED + "Back", null));
+        inv.setItem(1, getMaterialLoreItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
+        inv.setItem(2, getMaterialLoreItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
+        inv.setItem(4, getMaterialLoreItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
+        inv.setItem(5, getMaterialLoreItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
+        inv.setItem(6, getMaterialLoreItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
+        inv.setItem(7, getMaterialLoreItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
+        inv.setItem(8, getMaterialLoreItem(Material.GRAY_STAINED_GLASS_PANE, null, null));
 
 
         ItemStack itemStack = new ItemStack(Material.PAPER);
@@ -147,14 +146,6 @@ public class UiClick implements Listener {
         player.openInventory(inv);
     }
 
-    public ItemStack getItem(Material material, String customName, List<String> lore) {
-        ItemStack it = new ItemStack(material);
-        ItemMeta customM = it.getItemMeta();
-        if (customName != null) customM.setDisplayName(customName);
-        if (lore != null) customM.setLore(lore);
-        it.setItemMeta(customM);
-        return it;
-    }
 
     public void generateItems(Inventory inv) {
         Integer n = 0;
