@@ -1,20 +1,21 @@
 # ChatPlus
 
-ChatPlus est un plugin Minecraft qui permet de formater le chat. Il offre une variété de fonctionnalités pour améliorer l'expérience de chat des joueurs.
+ChatPlus est un plugin Minecraft qui permet de formater le chat. Il offre une variété de fonctionnalités pour améliorer l'expérience de chat des joueurs et le management de vôtre serveur.
 
 ## Fonctionnalités
 
 - Formatage du chat
-- Commandes personnalisées
-- Et plus encore...
+- ScoreBoard
+- MOTD
+- Et plus encore ....
 
 ## Commandes
 
 Voici une liste des commandes disponibles avec ChatPlus:
 
-- `/chatplus help` : Affiche l'aide du plugin.
-- `/chatplus reload` : Recharge la configuration du plugin.
-- `/chatplus version` : Affiche la version du plugin.
+- `/ctphelp` : Affiche l'aide du plugin.
+- `/ctpreload` : Recharge la configuration du plugin.
+- `/ctpadmin` : Ouvre le menu d'administration
 
 ## Installation
 
@@ -30,7 +31,7 @@ Les contributions sont les bienvenues! N'hésitez pas à ouvrir une issue ou à 
 
 ## Licence
 
-ChatPlus est sous licence [insérer le type de licence ici].
+ChatPlus est sous licence [MIT].
 
 ## Contact
 
