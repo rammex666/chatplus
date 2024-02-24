@@ -35,4 +35,4 @@ ChatPlus est sous licence [MIT].
 
 ## Contact
 
-Si vous avez des questions ou des problèmes, n'hésitez pas à [ouvrir une issue](lien vers les issues de votre projet GitHub).
+Si vous avez des questions ou des problèmes, n'hésitez pas à [ouvrir une issue](https://github.com/rammex666/chatplus/issues).
