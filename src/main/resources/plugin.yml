@@ -21,3 +21,6 @@ commands:
   ctpgp:
     description: "Group Chat"
     permission: ctp.gp
+  ctp:
+    description: "ChatPlus Panel Player Settings"
+    permission: ctp.settings

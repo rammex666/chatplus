@@ -12,6 +12,7 @@ import org.rammex.chatplus.events.ChatFormat;
 import org.rammex.chatplus.events.MotdModule;
 import org.rammex.chatplus.events.PlayerJoin;
 import org.rammex.chatplus.events.UiClick;
+import org.rammex.chatplus.utils.Metrics;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.io.File;
@@ -40,6 +41,7 @@ public final class Chatplus extends JavaPlugin {
         this.getCommand("ctpreload").setExecutor(new ctpreload(this));
         this.getCommand("csfchat").setExecutor(new csfchat(this));
         this.getCommand("ctpgp").setExecutor(new ctpgp(this));
+        this.getCommand("ctp").setExecutor(new ctp(this));
         Bukkit.getPluginManager().registerEvents(new UiClick(this), this);
         Bukkit.getPluginManager().registerEvents(new ChatFormat(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(this), this);
@@ -49,6 +51,10 @@ public final class Chatplus extends JavaPlugin {
         getConfig();
         RefreshScoarBoard();
         loadfiles();
+        int pluginId = 	21110;
+        Metrics metrics = new Metrics(this, pluginId);
+
+        metrics.getPluginData();
     }
 
     @Override
