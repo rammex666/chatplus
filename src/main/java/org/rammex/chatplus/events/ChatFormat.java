@@ -1,6 +1,7 @@
 package org.rammex.chatplus.events;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -52,7 +53,14 @@ public class ChatFormat implements Listener {
             String formattedMessage = hex(this.plugin.getConfig().getString("chatformat.format").replace("\\","").replace("{player}", playerName).replace("{message}", message).replace("{world}", world));
 
             formattedMessage = PlaceholderAPI.setPlaceholders(event.getPlayer(), formattedMessage);
-            getServer().broadcastMessage(formattedMessage);
+            this.plugin.getLogger().info(event.getPlayer().getName() + " >> " + message);
+            for (Player onlinePlayer : this.plugin.getServer().getOnlinePlayers()) {
+                if (!PlayerMessages.playerChatList.contains(onlinePlayer)) {
+                    onlinePlayer.sendMessage(formattedMessage);
+                } else {
+                    return;
+                }
+            }
         } else{
             String chatFormat = this.plugin.getConfig().getString("chatformat.format");
 
@@ -64,7 +72,14 @@ public class ChatFormat implements Listener {
 
                 String formattedMessage = hex(messagePart) + message + hex(restPart);
                 formattedMessage = PlaceholderAPI.setPlaceholders(event.getPlayer(), formattedMessage.replace("\\","").replace("{player}", playerName).replace("{world}", world));
-                getServer().broadcastMessage(formattedMessage);
+                this.plugin.getLogger().info(event.getPlayer().getName() + " >> " + message);
+                for (Player onlinePlayer : this.plugin.getServer().getOnlinePlayers()) {
+                    if (!PlayerMessages.playerChatList.contains(onlinePlayer)) {
+                        onlinePlayer.sendMessage(formattedMessage);
+                    } else {
+                        return;
+                    }
+                }
             }
         }
 

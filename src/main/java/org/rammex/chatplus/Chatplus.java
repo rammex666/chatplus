@@ -8,10 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.rammex.chatplus.commands.*;
-import org.rammex.chatplus.events.ChatFormat;
-import org.rammex.chatplus.events.MotdModule;
-import org.rammex.chatplus.events.PlayerJoin;
-import org.rammex.chatplus.events.UiClick;
+import org.rammex.chatplus.events.*;
 import org.rammex.chatplus.utils.Metrics;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
@@ -46,6 +43,7 @@ public final class Chatplus extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ChatFormat(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(this), this);
         Bukkit.getPluginManager().registerEvents(new MotdModule(this), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerMessages(this), this);
         saveDefaultConfig();
         reloadConfig();
         getConfig();

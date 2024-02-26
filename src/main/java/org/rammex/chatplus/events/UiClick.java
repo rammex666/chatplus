@@ -15,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.rammex.chatplus.Chatplus;
 import org.rammex.chatplus.ui.adminpanel;
-import org.rammex.chatplus.utils.PlayerManager;
 import org.rammex.chatplus.utils.PluginState;
 
 import java.util.Collections;
@@ -32,7 +31,6 @@ public class UiClick implements Listener {
     }
     private final PluginState pluginState = new PluginState();
 
-    private final PlayerManager playerManager = new PlayerManager();
 
 
 
@@ -71,28 +69,6 @@ public class UiClick implements Listener {
         if (title.equalsIgnoreCase("ScoreBoard")){
             e.setCancelled(true);
             e.setResult(Event.Result.DENY);
-        }
-        if (title.equalsIgnoreCase("Settings Panel")){
-            e.setCancelled(true);
-            e.setResult(Event.Result.DENY);
-            if(current.getItemMeta().getDisplayName().equals(ChatColor.RED+"Admin Panel")){
-                whoClicked.closeInventory();
-                adminpanel.getadminpanel(whoClicked);
-            }
-            if(current.getItemMeta().getDisplayName().equals(ChatColor.RED+"See Player messages")){
-                if(playerManager.getPlayerChatList().contains(whoClicked)){
-                    playerManager.getPlayerChatList().remove(whoClicked);
-                    whoClicked.sendMessage(ChatColor.GREEN +"You will now see player messages");
-                }
-                whoClicked.closeInventory();
-            }
-            if(current.getItemMeta().getDisplayName().equals(ChatColor.GREEN+"See Player messages")){
-                if(!playerManager.getPlayerChatList().contains(whoClicked)){
-                    playerManager.getPlayerChatList().add(whoClicked);
-                    whoClicked.sendMessage(ChatColor.RED +"You will no longer see player messages");
-                }
-                whoClicked.closeInventory();
-            }
         }
         if (title.equalsIgnoreCase("Chat Format Templates")){
             e.setCancelled(true);
