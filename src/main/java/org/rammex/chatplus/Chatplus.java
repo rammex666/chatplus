@@ -1,5 +1,6 @@
 package org.rammex.chatplus;
 
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -10,35 +11,32 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.rammex.chatplus.commands.*;
 import org.rammex.chatplus.events.*;
 import org.rammex.chatplus.utils.Metrics;
-import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
 
 public final class Chatplus extends JavaPlugin {
-    File dir = getDataFolder();
-    File fr = new File(dir, "fr.yml");
-    File en = new File(dir, "en.yml");
-    File de = new File(dir, "de.yml");
-    File ct = new File(dir, "chatformat.yml");
-    FileConfiguration frconf;
-    FileConfiguration enconf;
-    FileConfiguration deconf;
-    FileConfiguration ctconf;
+    private File dir = getDataFolder();
 
-
+    @Getter
+    private FileConfiguration frConf;
+    @Getter
+    private FileConfiguration enConf;
+    @Getter
+    private FileConfiguration deConf;
+    @Getter
+    private FileConfiguration ctConf;
 
     @Override
     public void onEnable() {
         dir.mkdirs();
-        logmessage();
-        this.getCommand("ctphelp").setExecutor(new ctphelp(this));
-        this.getCommand("ctpadmin").setExecutor(new ctpadmin(this));
-        this.getCommand("ctpreload").setExecutor(new ctpreload(this));
-        this.getCommand("csfchat").setExecutor(new csfchat(this));
-        this.getCommand("ctpgp").setExecutor(new ctpgp(this));
-        this.getCommand("ctp").setExecutor(new ctp(this));
+        logMessage();
+        this.getCommand("ctphelp").setExecutor(new CtpHelp(this));
+        this.getCommand("ctpadmin").setExecutor(new CtpAdmin(this));
+        this.getCommand("ctpreload").setExecutor(new CtpReload(this));
+        this.getCommand("csfchat").setExecutor(new CsfChat(this));
+        this.getCommand("ctpgp").setExecutor(new CtpGp(this));
+        this.getCommand("ctp").setExecutor(new Ctp(this));
         Bukkit.getPluginManager().registerEvents(new UiClick(this), this);
         Bukkit.getPluginManager().registerEvents(new ChatFormat(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(this), this);
@@ -47,9 +45,9 @@ public final class Chatplus extends JavaPlugin {
         saveDefaultConfig();
         reloadConfig();
         getConfig();
-        RefreshScoarBoard();
-        loadfiles();
-        int pluginId = 	21110;
+        refreshScoreBoard();
+        loadFiles();
+        int pluginId = 21110;
         Metrics metrics = new Metrics(this, pluginId);
 
         metrics.getPluginData();
@@ -57,104 +55,63 @@ public final class Chatplus extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+        // No action needed on disable
     }
 
-
-    void logmessage() {
+    private void logMessage() {
         getLogger().info("-----------");
         getLogger().info("Plugin Created by .rammex");
         getLogger().info("Version 1.3.1");
         getLogger().info("-----------");
     }
 
-    public void RefreshScoarBoard(){
+    public void refreshScoreBoard() {
         new BukkitRunnable() {
-
             @Override
             public void run() {
-                if(getConfig().getBoolean("scoreboard.enable")){
+                if(getConfig().getBoolean("scoreboard.enable")) {
                     for(Player player : Bukkit.getOnlinePlayers()) {
                         PlayerJoin.updateScoreboard(player);
                     }
                 }
             }
-
         }.runTaskTimer(this, 2000L, 2000L);
     }
 
-    void loadfiles(){
-        //fr
-        fr = new File(getDataFolder()+"/lang", "fr.yml");
-        if (!fr.exists()) {
-            fr.getParentFile().mkdirs();
-            saveResource("lang/fr.yml", false);
+    private void loadFiles() {
+        loadFile("fr");
+        loadFile("en");
+        loadFile("de");
+        loadFile("chatformat");
+    }
+
+    private void loadFile(String fileName) {
+        File file = new File(getDataFolder() + "/lang", fileName + ".yml");
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            saveResource("lang/" + fileName + ".yml", false);
         }
 
-        frconf = new YamlConfiguration();
+        FileConfiguration fileConf = new YamlConfiguration();
         try {
-            frconf.load(fr);
+            fileConf.load(file);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
 
-        // en
-        en = new File(getDataFolder()+"/lang", "en.yml");
-        if (!en.exists()) {
-            en.getParentFile().mkdirs();
-            saveResource("lang/en.yml", false);
-        }
-
-        enconf = new YamlConfiguration();
-        try {
-            enconf.load(en);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-
-       de = new File(getDataFolder()+"/lang", "de.yml");
-        if (!de.exists()) {
-            de.getParentFile().mkdirs();
-            saveResource("lang/de.yml", false);
-        }
-
-        deconf = new YamlConfiguration();
-        try {
-            deconf.load(de);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-
-
-        ct = new File(getDataFolder()+"/templates", "chatformat.yml");
-        if (!ct.exists()) {
-            ct.getParentFile().mkdirs();
-            saveResource("templates/chatformat.yml", false);
-        }
-
-        ctconf = new YamlConfiguration();
-        try {
-            ctconf.load(ct);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
+        switch (fileName) {
+            case "fr":
+                frConf = fileConf;
+                break;
+            case "en":
+                enConf = fileConf;
+                break;
+            case "de":
+                deConf = fileConf;
+                break;
+            case "chatformat":
+                ctConf = fileConf;
+                break;
         }
     }
-
-    public FileConfiguration getfr(){
-        return this.frconf;
-    }
-
-    public FileConfiguration geten(){
-        return this.enconf;
-    }
-
-    public FileConfiguration getde(){
-        return this.deconf;
-    }
-    public FileConfiguration getct(){
-        return this.ctconf;
-    }
-
-    
-
 }

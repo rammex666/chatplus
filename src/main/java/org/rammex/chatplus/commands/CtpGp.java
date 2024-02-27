@@ -7,29 +7,23 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.rammex.chatplus.Chatplus;
 
-
 import static org.rammex.chatplus.utils.ColorUtil.hex;
 
-public class ctpgp implements CommandExecutor {
-    Chatplus plugin;
-    public ctpgp(Chatplus plugin) {
+public class CtpGp implements CommandExecutor {
+    private final Chatplus plugin;
+
+    public CtpGp(Chatplus plugin) {
         this.plugin = plugin;
     }
 
-
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        String lang= this.plugin.getConfig().getString("lang");
+        String language = this.plugin.getConfig().getString("lang");
         if (!(sender instanceof Player)) {
-            if(lang.equals("en")){
-                sender.sendMessage(hex(this.plugin.geten().getString("errormessage.notplayer")));
-            }
-            if(lang.equals("fr")){
-                sender.sendMessage(hex(this.plugin.getfr().getString("errormessage.notplayer")));
-            }
-            if(lang.equals("de")){
-                sender.sendMessage(hex(this.plugin.getde().getString("errormessage.notplayer")));
+            switch (language) {
+                case "en" -> sender.sendMessage(hex(this.plugin.getEnConf().getString("errormessage.notplayer")));
+                case "fr" -> sender.sendMessage(hex(this.plugin.getFrConf().getString("errormessage.notplayer")));
+                case "de" -> sender.sendMessage(hex(this.plugin.getDeConf().getString("errormessage.notplayer")));
             }
             return true;
         }
@@ -37,14 +31,10 @@ public class ctpgp implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length < 1) {
-            if(lang.equals("en")){
-                player.sendMessage(hex(this.plugin.geten().getString("commandsusage.ctpgp")));
-            }
-            if(lang.equals("fr")){
-                player.sendMessage(hex(this.plugin.getfr().getString("commandsusage.ctpgp")));
-            }
-            if(lang.equals("de")){
-                player.sendMessage(hex(this.plugin.getde().getString("commandsusage.ctpgp")));
+            switch(language) {
+                case "en" -> player.sendMessage(hex(this.plugin.getEnConf().getString("commandsusage.ctpgp")));
+                case "fr" -> player.sendMessage(hex(this.plugin.getFrConf().getString("commandsusage.ctpgp")));
+                case "de" -> player.sendMessage(hex(this.plugin.getDeConf().getString("commandsusage.ctpgp")));
             }
             return true;
         }
@@ -52,14 +42,10 @@ public class ctpgp implements CommandExecutor {
         String group = args[0].toLowerCase();
 
         if (!this.plugin.getConfig().contains("groupschat." + group)) {
-            if(lang.equals("en")){
-                player.sendMessage(hex(this.plugin.geten().getString("errormessage.groupnotexist")));
-            }
-            if(lang.equals("fr")){
-                player.sendMessage(hex(this.plugin.getfr().getString("errormessage.groupnotexist")));
-            }
-            if(lang.equals("de")){
-                player.sendMessage(hex(this.plugin.getde().getString("errormessage.groupnotexist")));
+            switch (language) {
+                case "en" -> player.sendMessage(hex(this.plugin.getEnConf().getString("errormessage.groupnotexist")));
+                case "fr" -> player.sendMessage(hex(this.plugin.getFrConf().getString("errormessage.groupnotexist")));
+                case "de" -> player.sendMessage(hex(this.plugin.getDeConf().getString("errormessage.groupnotexist")));
             }
             return true;
         }
@@ -67,14 +53,10 @@ public class ctpgp implements CommandExecutor {
         String permission = this.plugin.getConfig().getString("groupschat." + group + ".permission");
 
         if (!player.hasPermission(permission)) {
-            if(lang.equals("en")){
-                player.sendMessage(hex(this.plugin.geten().getString("errormessage.noperm")));
-            }
-            if(lang.equals("fr")){
-                player.sendMessage(hex(this.plugin.getfr().getString("errormessage.noperm")));
-            }
-            if(lang.equals("de")){
-                player.sendMessage(hex(this.plugin.getde().getString("errormessage.noperm")));
+            switch (language) {
+                case "en" -> player.sendMessage(hex(this.plugin.getEnConf().getString("errormessage.noperm")));
+                case "fr" -> player.sendMessage(hex(this.plugin.getFrConf().getString("errormessage.noperm")));
+                case "de" -> player.sendMessage(hex(this.plugin.getDeConf().getString("errormessage.noperm")));
             }
             return true;
         }
@@ -83,7 +65,7 @@ public class ctpgp implements CommandExecutor {
 
         String title = hex(this.plugin.getConfig().getString("groupschat." + group + ".title"));
         if (title == null) {
-            title = hex("#98FFF1[GROUPCHAT]"); // Remplacez par une valeur par défaut ou ajustez selon votre logique
+            title = hex("#98FFF1[GROUPCHAT]");
         }
 
         String formattedMessage = hex(this.plugin.getConfig().getString("chatformat.format")
@@ -103,6 +85,4 @@ public class ctpgp implements CommandExecutor {
 
         return true;
     }
-
-
 }

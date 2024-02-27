@@ -9,17 +9,16 @@ import static org.rammex.chatplus.utils.ColorUtil.hex;
 
 public class MotdModule implements Listener {
 
-    Chatplus plugin;
+    private final Chatplus plugin;
 
     public MotdModule(Chatplus plugin) {
         this.plugin = plugin;
     }
 
-
     @EventHandler
-    public void onPing(ServerListPingEvent e){
-        if(this.plugin.getConfig().getBoolean("motd.enable")){
-            e.setMotd(hex(this.plugin.getConfig().getString("motd.motd")));
+    public void onPing(ServerListPingEvent event){
+        if(this.plugin.getConfig().getBoolean("motd.enable")) {
+            event.setMotd(hex(this.plugin.getConfig().getString("motd.motd")));
         }
     }
 }

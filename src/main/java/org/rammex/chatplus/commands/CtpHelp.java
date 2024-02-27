@@ -1,6 +1,5 @@
 package org.rammex.chatplus.commands;
 
-import net.kyori.adventure.platform.facet.Facet;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,34 +7,33 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.rammex.chatplus.Chatplus;
 
-public class ctphelp implements CommandExecutor {
-    Chatplus plugin;
-    public ctphelp(Chatplus plugin) {
+public class CtpHelp implements CommandExecutor {
+    private final Chatplus plugin;
+
+    public CtpHelp(Chatplus plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String arg, String[] args) {
         Player player = (Player) sender;
-        String lang= this.plugin.getConfig().getString("lang");
-        switch (lang) {
+        String language = this.plugin.getConfig().getString("lang");
+        switch (language) {
             case "fr" -> {
-                fr(player);
+                displayHelpInFrench(player);
             }
             case "en" -> {
-                en(player);
+                displayHelpInEnglish(player);
             }
             case "de" -> {
-                de(player);
+                displayHelpInGerman(player);
             }
         }
 
         return false;
     }
 
-
-
-    void fr(Player player){
+    void displayHelpInFrench(Player player){
         player.sendMessage(ChatColor.BLUE+"--------------------");
         player.sendMessage(ChatColor.AQUA+"ChatPlus | Version 1.3");
         player.sendMessage("");
@@ -46,7 +44,7 @@ public class ctphelp implements CommandExecutor {
         player.sendMessage(ChatColor.AQUA+"/ctpreload | Recharger la configuration");
         player.sendMessage(ChatColor.BLUE+"--------------------");
     }
-    void de(Player player){
+    void displayHelpInGerman(Player player){
         player.sendMessage(ChatColor.BLUE+"--------------------");
         player.sendMessage(ChatColor.AQUA+"ChatPlus | Version 1.3");
         player.sendMessage("");
@@ -57,7 +55,7 @@ public class ctphelp implements CommandExecutor {
         player.sendMessage(ChatColor.AQUA+"/ctpreload | Die Konfiguration neu laden");
         player.sendMessage(ChatColor.BLUE+"--------------------");
     }
-    void en(Player player){
+    void displayHelpInEnglish(Player player){
         player.sendMessage(ChatColor.BLUE+"--------------------");
         player.sendMessage(ChatColor.AQUA+"ChatPlus | Version 1.3");
         player.sendMessage("");
@@ -68,7 +66,4 @@ public class ctphelp implements CommandExecutor {
         player.sendMessage(ChatColor.AQUA+"/ctpreload | Reload The config");
         player.sendMessage(ChatColor.BLUE+"--------------------");
     }
-
-
-
 }

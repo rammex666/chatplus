@@ -6,18 +6,19 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.rammex.chatplus.Chatplus;
-import org.rammex.chatplus.ui.settingspanel;
+import org.rammex.chatplus.ui.SettingsPanel;
 
-public class ctp implements CommandExecutor {
-    Chatplus plugin;
-    public ctp(Chatplus plugin) {
+public class Ctp implements CommandExecutor {
+    private final Chatplus plugin;
+
+    public Ctp(Chatplus plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String arg, @NotNull String[] args) {
         Player player = (Player) sender;
-        settingspanel.getSettingsPanel(player);
+        SettingsPanel.getSettingsPanel(player);
         return false;
     }
 }

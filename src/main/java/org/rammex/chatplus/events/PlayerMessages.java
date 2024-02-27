@@ -10,16 +10,16 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.rammex.chatplus.Chatplus;
-import org.rammex.chatplus.ui.adminpanel;
+import org.rammex.chatplus.ui.AdminPanel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerMessages implements Listener {
-    Chatplus plugin;
+    private final Chatplus plugin;
 
     @Getter
-    public static List<Player> playerChatList;
+    private static List<Player> playerChatList;
 
     public PlayerMessages(Chatplus plugin) {
         this.plugin = plugin;
@@ -27,34 +27,31 @@ public class PlayerMessages implements Listener {
     }
 
     @EventHandler
-    public void Uiclick(InventoryClickEvent e){
-        final Inventory inventory = e.getInventory();
-        final Player whoClicked = (Player) e.getWhoClicked();
-        final String title = e.getView().getTitle();
-        ItemStack current = e.getCurrentItem();
-        if (title.equalsIgnoreCase("Settings Panel")){
-            e.setCancelled(true);
-            e.setResult(Event.Result.DENY);
-            if(current.getItemMeta().getDisplayName().equals(ChatColor.RED+"Admin Panel")){
-                whoClicked.closeInventory();
-                adminpanel.getadminpanel(whoClicked);
+    public void onUiClick(InventoryClickEvent event){
+        final Player playerWhoClicked = (Player) event.getWhoClicked();
+        final String inventoryTitle = event.getView().getTitle();
+        ItemStack clickedItem = event.getCurrentItem();
+        if (inventoryTitle.equalsIgnoreCase("Settings Panel")){
+            event.setCancelled(true);
+            event.setResult(Event.Result.DENY);
+            if(clickedItem.getItemMeta().getDisplayName().equals(ChatColor.RED+"Admin Panel")){
+                playerWhoClicked.closeInventory();
+                AdminPanel.openChatFormatPanel(playerWhoClicked);
             }
-            if(current.getItemMeta().getDisplayName().equals(ChatColor.RED+"See Player messages") && whoClicked.hasPermission("ctp.SeeSetting")){
-                if(playerChatList.contains(whoClicked)){
-                    playerChatList.remove(whoClicked);
-                    whoClicked.sendMessage(ChatColor.GREEN +"You will now see player messages");
+            if(clickedItem.getItemMeta().getDisplayName().equals(ChatColor.RED+"See Player messages") && playerWhoClicked.hasPermission("ctp.SeeSetting")){
+                if(playerChatList.contains(playerWhoClicked)) {
+                    playerChatList.remove(playerWhoClicked);
+                    playerWhoClicked.sendMessage(ChatColor.GREEN +"You will now see player messages");
                 }
-                whoClicked.closeInventory();
+                playerWhoClicked.closeInventory();
             }
-            if(current.getItemMeta().getDisplayName().equals(ChatColor.GREEN+"See Player messages") && whoClicked.hasPermission("ctp.SeeSetting")){
-                if(!playerChatList.contains(whoClicked)){
-                    playerChatList.add(whoClicked);
-                    whoClicked.sendMessage(ChatColor.RED +"You will no longer see player messages");
+            if(clickedItem.getItemMeta().getDisplayName().equals(ChatColor.GREEN+"See Player messages") && playerWhoClicked.hasPermission("ctp.SeeSetting")){
+                if(!playerChatList.contains(playerWhoClicked)) {
+                    playerChatList.add(playerWhoClicked);
+                    playerWhoClicked.sendMessage(ChatColor.RED +"You will no longer see player messages");
                 }
-                whoClicked.closeInventory();
+                playerWhoClicked.closeInventory();
             }
         }
     }
-
-
 }
